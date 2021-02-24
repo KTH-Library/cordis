@@ -19,8 +19,8 @@ exec_sql <- function(con, sql)
 
 cordis_meta <- function() {
 
-  con <- duckdb::dbConnect(duckdb::duckdb(dbfile()))
-  on.exit(duckdb::dbDisconnect(con))
+  con <- cordis_con()
+  on.exit(cordis_disconnect(con))
   tbls <- DBI::dbListTables(con)
 
   counts <-
@@ -54,7 +54,8 @@ cordis_meta <- function() {
 #' @export
 #' @importFrom duckdb dbConnect duckdb
 cordis_con <- function() {
-  duckdb::dbConnect(duckdb::duckdb(file.path(cachedir(), "cordisdb")))
+  dbfile <- normalizePath(file.path(cachedir(), "cordisdb"))
+  duckdb::dbConnect(duckdb::duckdb(dbfile))
 }
 
 #' @title CORDIS tables
@@ -107,10 +108,10 @@ cordis_disconnect <- function(con) {
 #' @details also takes care of shutting down the connection
 #' @examples
 #' \dontrun{
-#' cordis_save_parquet("~/mycordisexport")
+#' cordis_export("~/mycordisexport")
 #' }
 #' @export
-cordis_save_parquet <- function(destdir, overwrite = FALSE) {
+cordis_export <- function(destdir, overwrite = FALSE) {
 
   if (dir.exists(destdir) && overwrite != TRUE)
     stop("The destination ", destdir, " already exists; pls use overwrite = TRUE")
@@ -121,3 +122,54 @@ cordis_save_parquet <- function(destdir, overwrite = FALSE) {
 
   invisible(exec_sql(con, sprintf("export database '%s' (format parquet);", outdir)))
 }
+
+#' @title Import CORDIS database
+#' @description Imports the CORDIS database extract from parquet files, needs
+#' to run at least once after package installation
+#' @param repo_slug the repo slug for the GitHub repo with a release containing
+#' an export made using this package, Default: 'kth-library/cordis-data'
+#' @param refresh logical indicating whether to reimport overwriting existing data, Default: FALSE
+#' @param verbose logical whether to display messages, Default: TRUE
+#' @return invisible TRUE on success
+#' @examples
+#' \dontrun{
+#' if(interactive()){
+#'  cordis_import()
+#'  }
+#' }
+#' @export
+#' @importFrom piggyback pb_download pb_download_url
+#' @importFrom purrr map
+#' @importFrom DBI dbExecute
+cordis_import <- function(repo_slug = "kth-library/cordis-data",
+                          refresh = FALSE, verbose = TRUE) {
+
+  dldir <- normalizePath(file.path(cachedir(), "temp"))
+
+  if (dir.exists(dldir) && !refresh)
+    stop("Directory ", dldir, " already exits, pls retry with refresh=TRUE")
+
+  if (refresh) unlink(dldir, recursive = TRUE)
+  if (!dir.exists(dldir)) dir.create(dldir, recursive = TRUE)
+
+  repo <- repo_slug
+  piggyback::pb_download(repo = repo, dest = dldir)
+
+  urlz <- piggyback::pb_download_url(repo = repo)
+
+  sql <- sprintf(
+    "CREATE TABLE IF NOT EXISTS %s AS SELECT * FROM parquet_scan('%s');",
+    gsub("(.*?)\\.parquet$", "\\1", dir(dldir)),
+    dir(dldir, full.names = TRUE)
+  )
+
+  con <- cordis_con()
+  on.exit(cordis_disconnect(con))
+  res <- sql %>% purrr::map(function(x) DBI::dbExecute(con, x))
+
+  if (verbose)
+    message("Imported ", length(res), " parquet files into duckdb")
+
+  return(invisible(length(res) > 0))
+}
+

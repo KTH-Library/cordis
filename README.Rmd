@@ -18,17 +18,23 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of `cordis` is to provide data from CORDIS. CORDIS is an acronym for the Community Research and Development Information Service. It is the European Commission's primary source of results from the projects funded by the EU's framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020. 
+The goal of `cordis` is to simplify data access to data from [CORDIS](https://cordis.europa.eu/), which is an acronym for the Community Research and Development Information Service. It is the European Commission's primary source of results from the projects funded by the EU's framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020. 
 
 ## Data preparation
 
-CORDIS makes data about European research projects available at various locations, such as https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects.
+CORDIS makes data about European research projects available at various locations, such as https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects. The download speed is rate limited when working directly against these files, and file formats and compression are different. With some data preparation, these datasets can be loaded into a database, providing simplified and faster local access to the data.
 
-In [`data-raw`](data-raw) there are data preparation scripts which download data from these locations into a local cache directory (`~/.cache/cordis`). A [duckdb](https://duckdb.org) database is built from these files and installed locally in the same directory.
+In [`data-raw`](data-raw) there are data preparation scripts which download data from these locations into a local cache directory (`~/.cache/cordis`). A [duckdb](https://duckdb.org) database is built from these files and uploaded using [piggyback](https://github.com/ropensci/piggyback) to a GitHub repo at https://github.com/KTH-Library/cordis-data as a versioned GitHub Release. 
 
-The package then provides functions for making a connection to the database (allowing arbitrary data processing with tidyverse tools for example), and for inspecting the database schema / finding table and field names. 
+There is also a function for exporting the entire database in Parquet format, which allows moving the data for example to a [Minio](https://min.io/) server, where it can be accessed by other data integration tools like Apache Spark. Only package developers need to use these functions when preparing and updating the data.
 
-There is also a function for exporting the entire database in Parquet format, which allows moving the data to a Minio server, where it an be accessed by other data integration tools like Apache Spark.
+## Usage
+
+The data in the "github releases" location mentioned above can be installed locally by regular package users by running "cordis_import()", a function for importing the data from the data repository. This needs to be done once. The download and upload rate is good.
+
+Users can then make a connection to the database locally. This allows arbitrary in-process data processing with tidyverse tools such as dplyr.
+
+Convenience functions allows for inspecting the database schema / finding table and field names. 
 
 ## Installation
 
@@ -36,6 +42,8 @@ You can install the released version of `cordis` from [GitHub](https://github.co
 
 ``` r
 devtools::install_github("KTH-Library/cordis")
+# run once to install local data
+cordis_import()
 ```
 
 ## Example

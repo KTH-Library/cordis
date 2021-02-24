@@ -7,31 +7,50 @@
 
 <!-- badges: end -->
 
-The goal of `cordis` is to provide data from CORDIS. CORDIS is an
-acronym for the Community Research and Development Information Service.
-It is the European Commission’s primary source of results from the
-projects funded by the EU’s framework programmes for research and
-innovation. This includes programmes from FP1 to Horizon 2020.
+The goal of `cordis` is to simplify data access to data from
+[CORDIS](https://cordis.europa.eu/), which is an acronym for the
+Community Research and Development Information Service. It is the
+European Commission’s primary source of results from the projects funded
+by the EU’s framework programmes for research and innovation. This
+includes programmes from FP1 to Horizon 2020.
 
 ## Data preparation
 
 CORDIS makes data about European research projects available at various
 locations, such as
-<https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects>.
+<https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects>. The
+download speed is rate limited when working directly against these
+files, and file formats and compression are different. With some data
+preparation, these datasets can be loaded into a database, providing
+simplified and faster local access to the data.
 
 In [`data-raw`](data-raw) there are data preparation scripts which
 download data from these locations into a local cache directory
 (`~/.cache/cordis`). A [duckdb](https://duckdb.org) database is built
-from these files and installed locally in the same directory.
-
-The package then provides functions for making a connection to the
-database (allowing arbitrary data processing with tidyverse tools for
-example), and for inspecting the database schema / finding table and
-field names.
+from these files and uploaded using
+[piggyback](https://github.com/ropensci/piggyback) to a GitHub repo at
+<https://github.com/KTH-Library/cordis-data> as a versioned GitHub
+Release.
 
 There is also a function for exporting the entire database in Parquet
-format, which allows moving the data to a Minio server, where it an be
-accessed by other data integration tools like Apache Spark.
+format, which allows moving the data for example to a
+[Minio](https://min.io/) server, where it can be accessed by other data
+integration tools like Apache Spark. Only package developers need to use
+these functions when preparing and updating the data.
+
+## Usage
+
+The data in the “github releases” location mentioned above can be
+installed locally by regular package users by running
+“cordis\_import()”, a function for importing the data from the data
+repository. This needs to be done once. The download and upload rate is
+good.
+
+Users can then make a connection to the database locally. This allows
+arbitrary in-process data processing with tidyverse tools such as dplyr.
+
+Convenience functions allows for inspecting the database schema /
+finding table and field names.
 
 ## Installation
 
@@ -40,6 +59,8 @@ You can install the released version of `cordis` from
 
 ``` r
 devtools::install_github("KTH-Library/cordis")
+# run once to install local data
+cordis_import()
 ```
 
 ## Example
@@ -54,50 +75,47 @@ library(knitr)
 # tables in the database
 cordis_tables() %>%
   arrange(desc(n_row))
-#> # A tibble: 16 x 2
-#>    table                          n_row
-#>    <chr>                          <dbl>
-#>  1 scoreboard                   1048576
-#>  2 projectPublications           161524
-#>  3 organizations                 150287
-#>  4 projectDeliverables            84323
-#>  5 projects                       32161
-#>  6 reports                        19295
-#>  7 pi                              7525
-#>  8 FP7programmes                   6233
-#>  9 fp7subprogrammes                6096
-#> 10 h2020topics                     3878
-#> 11 FP6programmes                   2027
-#> 12 countries                       1503
-#> 13 h2020programmes                  909
-#> 14 sicCode                          426
-#> 15 projectFundingSchemeCategory     187
-#> 16 organizationActivityType           5
+#> # A tibble: 23 x 2
+#>    table                 n_row
+#>    <chr>                 <dbl>
+#>  1 scoreboard          1048576
+#>  2 projectPublications  161524
+#>  3 projectpublications  161524
+#>  4 organizations        150287
+#>  5 projectDeliverables   84323
+#>  6 projectdeliverables   84323
+#>  7 projects              32161
+#>  8 reports               19295
+#>  9 pi                     7525
+#> 10 FP7programmes          6233
+#> # … with 13 more rows
 
 # database schema
 cordis_schema() %>%
   head(20)
-#>           tablename cid       name    type notnull dflt_value    pk
-#> 1     FP6programmes   0        rcn  DOUBLE   FALSE       <NA> FALSE
-#> 2     FP6programmes   1       code VARCHAR   FALSE       <NA> FALSE
-#> 3     FP6programmes   2      title VARCHAR   FALSE       <NA> FALSE
-#> 4     FP6programmes   3 shortTitle VARCHAR   FALSE       <NA> FALSE
-#> 5     FP6programmes   4   language VARCHAR   FALSE       <NA> FALSE
-#> 6     FP7programmes   0        RCN  DOUBLE   FALSE       <NA> FALSE
-#> 7     FP7programmes   1       Code VARCHAR   FALSE       <NA> FALSE
-#> 8     FP7programmes   2      Title VARCHAR   FALSE       <NA> FALSE
-#> 9     FP7programmes   3 ShortTitle VARCHAR   FALSE       <NA> FALSE
-#> 10    FP7programmes   4   Language VARCHAR   FALSE       <NA> FALSE
-#> 11        countries   0     euCode VARCHAR   FALSE       <NA> FALSE
-#> 12        countries   1    isoCode VARCHAR   FALSE       <NA> FALSE
-#> 13        countries   2       name VARCHAR   FALSE       <NA> FALSE
-#> 14        countries   3   language VARCHAR   FALSE       <NA> FALSE
-#> 15 fp7subprogrammes   0       col1 VARCHAR   FALSE       <NA> FALSE
-#> 16 fp7subprogrammes   1       col2 VARCHAR   FALSE       <NA> FALSE
-#> 17 fp7subprogrammes   2       col3 VARCHAR   FALSE       <NA> FALSE
-#> 18 fp7subprogrammes   3       col4 VARCHAR   FALSE       <NA> FALSE
-#> 19 fp7subprogrammes   4       col5 VARCHAR   FALSE       <NA> FALSE
-#> 20 fp7subprogrammes   5       col6 VARCHAR   FALSE       <NA> FALSE
+#> # A tibble: 20 x 7
+#>    tablename       cid name       type    notnull dflt_value pk   
+#>    <chr>         <int> <chr>      <chr>   <lgl>   <chr>      <lgl>
+#>  1 FP6programmes     0 rcn        DOUBLE  FALSE   <NA>       FALSE
+#>  2 FP6programmes     1 code       VARCHAR FALSE   <NA>       FALSE
+#>  3 FP6programmes     2 title      VARCHAR FALSE   <NA>       FALSE
+#>  4 FP6programmes     3 shortTitle VARCHAR FALSE   <NA>       FALSE
+#>  5 FP6programmes     4 language   VARCHAR FALSE   <NA>       FALSE
+#>  6 FP7programmes     0 RCN        DOUBLE  FALSE   <NA>       FALSE
+#>  7 FP7programmes     1 Code       VARCHAR FALSE   <NA>       FALSE
+#>  8 FP7programmes     2 Title      VARCHAR FALSE   <NA>       FALSE
+#>  9 FP7programmes     3 ShortTitle VARCHAR FALSE   <NA>       FALSE
+#> 10 FP7programmes     4 Language   VARCHAR FALSE   <NA>       FALSE
+#> 11 countries         0 euCode     VARCHAR FALSE   <NA>       FALSE
+#> 12 countries         1 isoCode    VARCHAR FALSE   <NA>       FALSE
+#> 13 countries         2 name       VARCHAR FALSE   <NA>       FALSE
+#> 14 countries         3 language   VARCHAR FALSE   <NA>       FALSE
+#> 15 fp6programmes     0 rcn        DOUBLE  FALSE   <NA>       FALSE
+#> 16 fp6programmes     1 code       VARCHAR FALSE   <NA>       FALSE
+#> 17 fp6programmes     2 title      VARCHAR FALSE   <NA>       FALSE
+#> 18 fp6programmes     3 shortTitle VARCHAR FALSE   <NA>       FALSE
+#> 19 fp6programmes     4 language   VARCHAR FALSE   <NA>       FALSE
+#> 20 fp7programmes     0 RCN        DOUBLE  FALSE   <NA>       FALSE
 
 # get a connection
 con <- cordis_con()
