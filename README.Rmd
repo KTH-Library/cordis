@@ -1,0 +1,82 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# cordis
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of `cordis` is to provide data from CORDIS. CORDIS is an acronym for the Community Research and Development Information Service. It is the European Commission's primary source of results from the projects funded by the EU's framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020. 
+
+## Data preparation
+
+CORDIS makes data about European research projects available at various locations, such as https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects.
+
+In [`data-raw`](data-raw) there are data preparation scripts which download data from these locations into a local cache directory (`~/.cache/cordis`). A [duckdb](https://duckdb.org) database is built from these files and installed locally in the same directory.
+
+The package then provides functions for making a connection to the database (allowing arbitrary data processing with tidyverse tools for example), and for inspecting the database schema / finding table and field names. 
+
+There is also a function for exporting the entire database in Parquet format, which allows moving the data to a Minio server, where it an be accessed by other data integration tools like Apache Spark.
+
+## Installation
+
+You can install the released version of `cordis` from [GitHub](https://github.com/KTH-Library/cordis) with:
+
+``` r
+devtools::install_github("KTH-Library/cordis")
+```
+
+## Example
+
+This is a basic example which shows you how to work with the data:
+
+```{r example}
+library(cordis)
+suppressPackageStartupMessages(library(dplyr))
+library(knitr)
+
+# tables in the database
+cordis_tables() %>%
+  arrange(desc(n_row))
+
+# database schema
+cordis_schema() %>%
+  head(20)
+
+# get a connection
+con <- cordis_con()
+# remember to disconnect when done:
+# cordis_disconnect(con)
+
+# display first five rows with PI data
+con %>% tbl("pi") %>% 
+  head(5) %>% 
+  knitr::kable()
+
+# display first row of projects info
+con %>% tbl("projects") %>% 
+  head(1) %>% 
+  glimpse()
+
+# display first row with publications data
+con %>% tbl("projectPublications") %>% 
+  head(1) %>% 
+  select(-starts_with("X")) %>% 
+  glimpse()
+
+cordis_disconnect(con)
+
+```
+
