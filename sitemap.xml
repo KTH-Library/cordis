@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://kth-library.github.io/cordis/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kth-library.github.io/cordis/reference/cordis_con.html</loc>
+  </url>
+  <url>
+    <loc>https://kth-library.github.io/cordis/reference/cordis_disconnect.html</loc>
+  </url>
+  <url>
+    <loc>https://kth-library.github.io/cordis/reference/cordis_export.html</loc>
+  </url>
+  <url>
+    <loc>https://kth-library.github.io/cordis/reference/cordis_import.html</loc>
+  </url>
+  <url>
+    <loc>https://kth-library.github.io/cordis/reference/cordis_schema.html</loc>
+  </url>
+  <url>
+    <loc>https://kth-library.github.io/cordis/reference/cordis_tables.html</loc>
+  </url>
+  <url>
+    <loc>https://kth-library.github.io/cordis/reference/pipe.html</loc>
+  </url>
+</urlset>
