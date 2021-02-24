@@ -5,6 +5,7 @@
 
 <!-- badges: start -->
 
+[![R-CMD-check](https://github.com/KTH-Library/cordis/workflows/R-CMD-check/badge.svg)](https://github.com/KTH-Library/cordis/actions)
 <!-- badges: end -->
 
 The goal of `cordis` is to simplify data access to data from
