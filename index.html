@@ -64,7 +64,7 @@
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#cordis" class="anchor"></a>cordis</h1></div>
 <!-- badges: start -->
-<!-- badges: end -->
+
 <p>The goal of <code>cordis</code> is to simplify data access to data from <a href="https://cordis.europa.eu/">CORDIS</a>, which is an acronym for the Community Research and Development Information Service. It is the European Commission’s primary source of results from the projects funded by the EU’s framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020.</p>
 <div id="data-preparation" class="section level2">
 <h2 class="hasAnchor">
@@ -101,47 +101,52 @@
 <span class="co"># tables in the database</span>
 <span class="fu"><a href="reference/cordis_tables.html">cordis_tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n_row</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 23 x 2</span>
-<span class="co">#&gt;    table                 n_row</span>
-<span class="co">#&gt;    &lt;chr&gt;                 &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 scoreboard          1048576</span>
-<span class="co">#&gt;  2 projectPublications  161524</span>
-<span class="co">#&gt;  3 projectpublications  161524</span>
-<span class="co">#&gt;  4 organizations        150287</span>
-<span class="co">#&gt;  5 projectDeliverables   84323</span>
-<span class="co">#&gt;  6 projectdeliverables   84323</span>
-<span class="co">#&gt;  7 projects              32161</span>
-<span class="co">#&gt;  8 reports               19295</span>
-<span class="co">#&gt;  9 pi                     7525</span>
-<span class="co">#&gt; 10 FP7programmes          6233</span>
-<span class="co">#&gt; # … with 13 more rows</span>
+<span class="co">#&gt; # A tibble: 16 x 2</span>
+<span class="co">#&gt;    table                          n_row</span>
+<span class="co">#&gt;    &lt;chr&gt;                          &lt;dbl&gt;</span>
+<span class="co">#&gt;  1 scoreboard                   1048576</span>
+<span class="co">#&gt;  2 projectpublications           161524</span>
+<span class="co">#&gt;  3 organizations                 150287</span>
+<span class="co">#&gt;  4 projectdeliverables            84323</span>
+<span class="co">#&gt;  5 projects                       32161</span>
+<span class="co">#&gt;  6 reports                        19295</span>
+<span class="co">#&gt;  7 pi                              7525</span>
+<span class="co">#&gt;  8 fp7programmes                   6233</span>
+<span class="co">#&gt;  9 fp7subprogrammes                6096</span>
+<span class="co">#&gt; 10 h2020topics                     3878</span>
+<span class="co">#&gt; 11 fp6programmes                   2027</span>
+<span class="co">#&gt; 12 countries                       1503</span>
+<span class="co">#&gt; 13 h2020programmes                  909</span>
+<span class="co">#&gt; 14 siccode                          426</span>
+<span class="co">#&gt; 15 projectfundingschemecategory     187</span>
+<span class="co">#&gt; 16 organizationactivitytype           5</span>
 
 <span class="co"># database schema</span>
 <span class="fu"><a href="reference/cordis_schema.html">cordis_schema</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 20 x 7</span>
-<span class="co">#&gt;    tablename       cid name       type    notnull dflt_value pk   </span>
-<span class="co">#&gt;    &lt;chr&gt;         &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;      &lt;lgl&gt;</span>
-<span class="co">#&gt;  1 FP6programmes     0 rcn        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  2 FP6programmes     1 code       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  3 FP6programmes     2 title      VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  4 FP6programmes     3 shortTitle VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  5 FP6programmes     4 language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  6 FP7programmes     0 RCN        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  7 FP7programmes     1 Code       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  8 FP7programmes     2 Title      VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  9 FP7programmes     3 ShortTitle VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 10 FP7programmes     4 Language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 11 countries         0 euCode     VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 12 countries         1 isoCode    VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 13 countries         2 name       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 14 countries         3 language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 15 fp6programmes     0 rcn        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 16 fp6programmes     1 code       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 17 fp6programmes     2 title      VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 18 fp6programmes     3 shortTitle VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 19 fp6programmes     4 language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 20 fp7programmes     0 RCN        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;    tablename          cid name       type    notnull dflt_value pk   </span>
+<span class="co">#&gt;    &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;      &lt;lgl&gt;</span>
+<span class="co">#&gt;  1 countries            0 euCode     VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  2 countries            1 isoCode    VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  3 countries            2 name       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  4 countries            3 language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  5 fp6programmes        0 rcn        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  6 fp6programmes        1 code       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  7 fp6programmes        2 title      VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  8 fp6programmes        3 shortTitle VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt;  9 fp6programmes        4 language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 10 fp7programmes        0 RCN        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 11 fp7programmes        1 Code       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 12 fp7programmes        2 Title      VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 13 fp7programmes        3 ShortTitle VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 14 fp7programmes        4 Language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 15 fp7subprogrammes     0 col1       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 16 fp7subprogrammes     1 col2       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 17 fp7subprogrammes     2 col3       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 18 fp7subprogrammes     3 col4       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 19 fp7subprogrammes     4 col5       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
+<span class="co">#&gt; 20 fp7subprogrammes     5 col6       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
 
 <span class="co"># get a connection</span>
 <span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cordis_con.html">cordis_con</a></span><span class="op">(</span><span class="op">)</span>
@@ -227,8 +232,8 @@
 <span class="co">#&gt; $ topics               &lt;chr&gt; "NMP-25-2014-1"</span>
 <span class="co">#&gt; $ frameworkProgramme   &lt;chr&gt; "H2020"</span>
 <span class="co">#&gt; $ title                &lt;chr&gt; "TailorFit; The Integrated “made to measure” wor…</span>
-<span class="co">#&gt; $ startDate            &lt;date&gt; 2015-06-01</span>
-<span class="co">#&gt; $ endDate              &lt;date&gt; 2015-11-30</span>
+<span class="co">#&gt; $ startDate            &lt;dttm&gt; 2015-06-01</span>
+<span class="co">#&gt; $ endDate              &lt;dttm&gt; 2015-11-30</span>
 <span class="co">#&gt; $ projectUrl           &lt;chr&gt; "http://www.creasolution.com"</span>
 <span class="co">#&gt; $ objective            &lt;chr&gt; "'The project targets all luxury fashion firms t…</span>
 <span class="co">#&gt; $ totalCost            &lt;dbl&gt; 71429</span>
@@ -242,7 +247,7 @@
 <span class="co">#&gt; $ subjects             &lt;lgl&gt; NA</span>
 
 <span class="co"># display first row with publications data</span>
-<span class="va">con</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="st">"projectPublications"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<span class="va">con</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="st">"projectpublications"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"X"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span>
@@ -285,7 +290,13 @@
 </ul>
 </div>
 
-  </div>
+  <div class="dev-status">
+<h2>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/KTH-Library/cordis/actions"><img src="https://github.com/KTH-Library/cordis/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
+</div>
 </div>
 
 
