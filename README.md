@@ -75,47 +75,52 @@ library(knitr)
 # tables in the database
 cordis_tables() %>%
   arrange(desc(n_row))
-#> # A tibble: 23 x 2
-#>    table                 n_row
-#>    <chr>                 <dbl>
-#>  1 scoreboard          1048576
-#>  2 projectPublications  161524
-#>  3 projectpublications  161524
-#>  4 organizations        150287
-#>  5 projectDeliverables   84323
-#>  6 projectdeliverables   84323
-#>  7 projects              32161
-#>  8 reports               19295
-#>  9 pi                     7525
-#> 10 FP7programmes          6233
-#> # … with 13 more rows
+#> # A tibble: 16 x 2
+#>    table                          n_row
+#>    <chr>                          <dbl>
+#>  1 scoreboard                   1048576
+#>  2 projectpublications           161524
+#>  3 organizations                 150287
+#>  4 projectdeliverables            84323
+#>  5 projects                       32161
+#>  6 reports                        19295
+#>  7 pi                              7525
+#>  8 fp7programmes                   6233
+#>  9 fp7subprogrammes                6096
+#> 10 h2020topics                     3878
+#> 11 fp6programmes                   2027
+#> 12 countries                       1503
+#> 13 h2020programmes                  909
+#> 14 siccode                          426
+#> 15 projectfundingschemecategory     187
+#> 16 organizationactivitytype           5
 
 # database schema
 cordis_schema() %>%
   head(20)
 #> # A tibble: 20 x 7
-#>    tablename       cid name       type    notnull dflt_value pk   
-#>    <chr>         <int> <chr>      <chr>   <lgl>   <chr>      <lgl>
-#>  1 FP6programmes     0 rcn        DOUBLE  FALSE   <NA>       FALSE
-#>  2 FP6programmes     1 code       VARCHAR FALSE   <NA>       FALSE
-#>  3 FP6programmes     2 title      VARCHAR FALSE   <NA>       FALSE
-#>  4 FP6programmes     3 shortTitle VARCHAR FALSE   <NA>       FALSE
-#>  5 FP6programmes     4 language   VARCHAR FALSE   <NA>       FALSE
-#>  6 FP7programmes     0 RCN        DOUBLE  FALSE   <NA>       FALSE
-#>  7 FP7programmes     1 Code       VARCHAR FALSE   <NA>       FALSE
-#>  8 FP7programmes     2 Title      VARCHAR FALSE   <NA>       FALSE
-#>  9 FP7programmes     3 ShortTitle VARCHAR FALSE   <NA>       FALSE
-#> 10 FP7programmes     4 Language   VARCHAR FALSE   <NA>       FALSE
-#> 11 countries         0 euCode     VARCHAR FALSE   <NA>       FALSE
-#> 12 countries         1 isoCode    VARCHAR FALSE   <NA>       FALSE
-#> 13 countries         2 name       VARCHAR FALSE   <NA>       FALSE
-#> 14 countries         3 language   VARCHAR FALSE   <NA>       FALSE
-#> 15 fp6programmes     0 rcn        DOUBLE  FALSE   <NA>       FALSE
-#> 16 fp6programmes     1 code       VARCHAR FALSE   <NA>       FALSE
-#> 17 fp6programmes     2 title      VARCHAR FALSE   <NA>       FALSE
-#> 18 fp6programmes     3 shortTitle VARCHAR FALSE   <NA>       FALSE
-#> 19 fp6programmes     4 language   VARCHAR FALSE   <NA>       FALSE
-#> 20 fp7programmes     0 RCN        DOUBLE  FALSE   <NA>       FALSE
+#>    tablename          cid name       type    notnull dflt_value pk   
+#>    <chr>            <int> <chr>      <chr>   <lgl>   <chr>      <lgl>
+#>  1 countries            0 euCode     VARCHAR FALSE   <NA>       FALSE
+#>  2 countries            1 isoCode    VARCHAR FALSE   <NA>       FALSE
+#>  3 countries            2 name       VARCHAR FALSE   <NA>       FALSE
+#>  4 countries            3 language   VARCHAR FALSE   <NA>       FALSE
+#>  5 fp6programmes        0 rcn        DOUBLE  FALSE   <NA>       FALSE
+#>  6 fp6programmes        1 code       VARCHAR FALSE   <NA>       FALSE
+#>  7 fp6programmes        2 title      VARCHAR FALSE   <NA>       FALSE
+#>  8 fp6programmes        3 shortTitle VARCHAR FALSE   <NA>       FALSE
+#>  9 fp6programmes        4 language   VARCHAR FALSE   <NA>       FALSE
+#> 10 fp7programmes        0 RCN        DOUBLE  FALSE   <NA>       FALSE
+#> 11 fp7programmes        1 Code       VARCHAR FALSE   <NA>       FALSE
+#> 12 fp7programmes        2 Title      VARCHAR FALSE   <NA>       FALSE
+#> 13 fp7programmes        3 ShortTitle VARCHAR FALSE   <NA>       FALSE
+#> 14 fp7programmes        4 Language   VARCHAR FALSE   <NA>       FALSE
+#> 15 fp7subprogrammes     0 col1       VARCHAR FALSE   <NA>       FALSE
+#> 16 fp7subprogrammes     1 col2       VARCHAR FALSE   <NA>       FALSE
+#> 17 fp7subprogrammes     2 col3       VARCHAR FALSE   <NA>       FALSE
+#> 18 fp7subprogrammes     3 col4       VARCHAR FALSE   <NA>       FALSE
+#> 19 fp7subprogrammes     4 col5       VARCHAR FALSE   <NA>       FALSE
+#> 20 fp7subprogrammes     5 col6       VARCHAR FALSE   <NA>       FALSE
 
 # get a connection
 con <- cordis_con()
@@ -153,8 +158,8 @@ con %>% tbl("projects") %>%
 #> $ topics               <chr> "NMP-25-2014-1"
 #> $ frameworkProgramme   <chr> "H2020"
 #> $ title                <chr> "TailorFit; The Integrated “made to measure” wor…
-#> $ startDate            <date> 2015-06-01
-#> $ endDate              <date> 2015-11-30
+#> $ startDate            <dttm> 2015-06-01
+#> $ endDate              <dttm> 2015-11-30
 #> $ projectUrl           <chr> "http://www.creasolution.com"
 #> $ objective            <chr> "'The project targets all luxury fashion firms t…
 #> $ totalCost            <dbl> 71429
@@ -168,7 +173,7 @@ con %>% tbl("projects") %>%
 #> $ subjects             <lgl> NA
 
 # display first row with publications data
-con %>% tbl("projectPublications") %>% 
+con %>% tbl("projectpublications") %>% 
   head(1) %>% 
   select(-starts_with("X")) %>% 
   glimpse()

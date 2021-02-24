@@ -79,7 +79,7 @@ con %>% tbl("projects") %>%
   glimpse()
 
 # display first row with publications data
-con %>% tbl("projectPublications") %>% 
+con %>% tbl("projectpublications") %>% 
   head(1) %>% 
   select(-starts_with("X")) %>% 
   glimpse()
