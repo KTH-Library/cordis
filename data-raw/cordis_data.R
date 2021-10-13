@@ -44,8 +44,18 @@ fp7subs <-
 cordis$fp7subprogrammes <- fp7subs
 
 # write tables to duckdb
-dbpath <- file.path(cachedir, "cordisdb")
-con <- duckdb::dbConnect(duckdb::duckdb(dbpath))
-purrr::map2(names(cordis), cordis, function(x, y) duckdb::dbWriteTable(con, x, y))
-duckdb::dbDisconnect(con)
+library(duckdb)
+
+
+dbpath <- normalizePath(file.path(cachedir, "cordisdb"))
+
+if (!dir.exists(dbpath))
+  dir.create(dbpath, recursive = TRUE)
+
+if (dir.exists(dbpath))
+  unlink(dbpath, recursive = TRUE)
+
+con <- dbConnect(duckdb(dbdir = dbpath))
+purrr::map2(names(cordis), cordis, function(x, y) dbWriteTable(con, x, y))
+dbDisconnect(con, shutdown = TRUE)
 

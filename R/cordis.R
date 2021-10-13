@@ -130,6 +130,7 @@ cordis_export <- function(destdir, overwrite = FALSE) {
 #' an export made using this package, Default: 'kth-library/cordis-data'
 #' @param refresh logical indicating whether to reimport overwriting existing data, Default: FALSE
 #' @param verbose logical whether to display messages, Default: TRUE
+#' @param version release version for data to use
 #' @return invisible TRUE on success
 #' @examples
 #' \dontrun{
@@ -142,7 +143,7 @@ cordis_export <- function(destdir, overwrite = FALSE) {
 #' @importFrom purrr map
 #' @importFrom DBI dbExecute
 cordis_import <- function(repo_slug = "kth-library/cordis-data",
-                          refresh = FALSE, verbose = TRUE) {
+                          refresh = FALSE, verbose = TRUE, version = "0.0.1") {
 
   dldir <- normalizePath(file.path(cachedir(), "temp"))
 
@@ -153,9 +154,9 @@ cordis_import <- function(repo_slug = "kth-library/cordis-data",
   if (!dir.exists(dldir)) dir.create(dldir, recursive = TRUE)
 
   repo <- repo_slug
-  piggyback::pb_download(repo = repo, dest = dldir)
+  piggyback::pb_download(repo = repo, dest = dldir, tag = version)
 
-  urlz <- piggyback::pb_download_url(repo = repo)
+  urlz <- piggyback::pb_download_url(repo = repo, tag = version)
 
   sql <- sprintf(
     "CREATE TABLE IF NOT EXISTS %s AS SELECT * FROM parquet_scan('%s');",

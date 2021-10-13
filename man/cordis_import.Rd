@@ -7,7 +7,8 @@
 cordis_import(
   repo_slug = "kth-library/cordis-data",
   refresh = FALSE,
-  verbose = TRUE
+  verbose = TRUE,
+  version = "0.0.1"
 )
 }
 \arguments{
@@ -17,6 +18,8 @@ an export made using this package, Default: 'kth-library/cordis-data'}
 \item{refresh}{logical indicating whether to reimport overwriting existing data, Default: FALSE}
 
 \item{verbose}{logical whether to display messages, Default: TRUE}
+
+\item{version}{release version for data to use}
 }
 \value{
 invisible TRUE on success

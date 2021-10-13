@@ -8,12 +8,12 @@ library(dplyr)
 #readRenviron("~/.Renviron")
 
 # dump the data
-cordis::cordis_save_parquet(destdir = "~/mycordisexport")
+cordis::cordis_export(destdir = "~/mycordisexport", overwrite = TRUE)
 
 filez <- dir("~/mycordisexport", pattern = ".parquet", full.names = TRUE)
 
 # TODO: fix this, see , do it manually for now...
-#piggyback::pb_new_release(repo = "KTH-Library/cordis-data", tag = "v0.1.0")
+#piggyback::pb_new_release(repo = "KTH-Library/cordis-data", tag = "v0.1.1")
 
 # upload to github releases
 pbu <- function(x)

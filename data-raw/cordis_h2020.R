@@ -5,7 +5,7 @@ library(readxl)
 # https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects
 
 
-tblname <- readr::read_lines(
+tbls <- readr::read_lines(
   "organizations
 projectDeliverables
 projectPublications
@@ -69,14 +69,16 @@ read_h2020 <- function(url) {
   return(res)
 }
 
-filez <- dir(cachedir, full.names = TRUE)
+filez <- dir(cachedir, full.names = TRUE, pattern = "*.csv")
 h2020 <- filez %>% map(read_h2020)
 
 # write tables to duckdb
 name_filez <- function(x) gsub(".*?/(.*?)\\.csv$", "\\1", x)
-dbpath <- file.path(cachedir, "cordisdb")
+dbpath <- normalizePath(file.path(cachedir, "cordisdb"))
+unlink(dbpath)
 con <- duckdb::dbConnect(duckdb::duckdb(dbpath))
 purrr::map2(name_filez(filez), h2020, function(x, y) duckdb::dbWriteTable(con, x, y))
 duckdb::dbDisconnect(con, shutdown = TRUE)
 
 con <- duckdb::dbConnect(duckdb::duckdb(dbpath))
+

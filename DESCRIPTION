@@ -1,7 +1,7 @@
 Package: cordis
 Type: Package
 Title: Data From CORDIS
-Version: 0.1.0
+Version: 0.1.1
 Author: Markus Skyttner
 Maintainer: Markus Skyttner <markussk@kth.se>
 Description: Provides access to open data from the European Union about 
