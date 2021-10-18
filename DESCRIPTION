@@ -1,6 +1,6 @@
 Package: cordis
 Type: Package
-Title: Data From CORDIS
+Title: Data from CORDIS
 Version: 0.1.1
 Author: Markus Skyttner
 Maintainer: Markus Skyttner <markussk@kth.se>
