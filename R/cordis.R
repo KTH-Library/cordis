@@ -143,7 +143,7 @@ cordis_export <- function(destdir, overwrite = FALSE) {
 #' @importFrom purrr map
 #' @importFrom DBI dbExecute
 cordis_import <- function(repo_slug = "kth-library/cordis-data",
-                          refresh = FALSE, verbose = TRUE, version = "0.0.1") {
+                          refresh = FALSE, verbose = TRUE, version = "v0.2.0") {
 
   dldir <- normalizePath(file.path(cachedir(), "temp"))
 
@@ -154,7 +154,9 @@ cordis_import <- function(repo_slug = "kth-library/cordis-data",
   if (!dir.exists(dldir)) dir.create(dldir, recursive = TRUE)
 
   repo <- repo_slug
-  piggyback::pb_download(repo = repo, dest = dldir, tag = version)
+
+  piggyback::pb_download(show_progress = TRUE, file = NULL,
+    repo = repo, dest = dldir, tag = version)
 
   urlz <- piggyback::pb_download_url(repo = repo, tag = version)
 
