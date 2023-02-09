@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/KTH-Library/cordis/workflows/R-CMD-check/badge.svg)](https://github.com/KTH-Library/cordis/actions)
+[![R-CMD-check](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `cordis` is to simplify data access to data from
@@ -42,10 +42,9 @@ these functions when preparing and updating the data.
 ## Usage
 
 The data in the “github releases” location mentioned above can be
-installed locally by regular package users by running
-“cordis\_import()”, a function for importing the data from the data
-repository. This needs to be done once. The download and upload rate is
-good.
+installed locally by regular package users by running “cordis_import()”,
+a function for importing the data from the data repository. This needs
+to be done once. The download and upload rate is good.
 
 Users can then make a connection to the database locally. This allows
 arbitrary in-process data processing with tidyverse tools such as dplyr.
@@ -74,32 +73,50 @@ suppressPackageStartupMessages(library(dplyr))
 library(knitr)
 
 # tables in the database
-cordis_tables() %>%
-  arrange(desc(n_row))
-#> # A tibble: 16 x 2
+cordis_tables() |>
+  arrange(desc(n_row)) |>
+  print(n = 50)
+#> Connecting to /home/markus/.cache/cordis/cordisdb
+#> # A tibble: 31 × 2
 #>    table                          n_row
 #>    <chr>                          <dbl>
-#>  1 scoreboard                   1048576
-#>  2 projectpublications           161524
-#>  3 organizations                 150287
-#>  4 projectdeliverables            84323
-#>  5 projects                       32161
-#>  6 reports                        19295
-#>  7 pi                              7525
-#>  8 fp7programmes                   6233
-#>  9 fp7subprogrammes                6096
-#> 10 h2020topics                     3878
-#> 11 fp6programmes                   2027
-#> 12 countries                       1503
-#> 13 h2020programmes                  909
-#> 14 siccode                          426
-#> 15 projectfundingschemecategory     187
-#> 16 organizationactivitytype           5
+#>  1 h2020_scoreboard             1048576
+#>  2 h2020_projectPublications     318740
+#>  3 h2020_organization            177078
+#>  4 h2020_webLink                 162178
+#>  5 h2020_projectDeliverables     137319
+#>  6 h2020_euroSciVoc              122551
+#>  7 h2020_legalBasis               65784
+#>  8 he_organization                36680
+#>  9 h2020_project                  35382
+#> 10 h2020_topics                   35382
+#> 11 h2020_reportSummaries          27082
+#> 12 he_euroSciVoc                  15810
+#> 13 h2020_pi                        8043
+#> 14 he_legalBasis                   7657
+#> 15 fp7programmes                   6233
+#> 16 fp7subprogrammes                6096
+#> 17 he_project                      5250
+#> 18 he_topics                       5250
+#> 19 h2020programmes                 3905
+#> 20 h2020topics                     3905
+#> 21 h2020topicKeywords              2562
+#> 22 projectIrps_h2020               2324
+#> 23 horizontopics                   2047
+#> 24 fp6programmes                   2027
+#> 25 countries                       1503
+#> 26 he_webLink                       241
+#> 27 he_projectDeliverables           205
+#> 28 projectfundingschemecategory     187
+#> 29 horizonprogrammes                123
+#> 30 h2020_webItem                      9
+#> 31 organizationactivitytype           5
 
 # database schema
 cordis_schema() %>%
   head(20)
-#> # A tibble: 20 x 7
+#> Connecting to /home/markus/.cache/cordis/cordisdb
+#> # A tibble: 20 × 7
 #>    tablename          cid name       type    notnull dflt_value pk   
 #>    <chr>            <int> <chr>      <chr>   <lgl>   <chr>      <lgl>
 #>  1 countries            0 euCode     VARCHAR FALSE   <NA>       FALSE
@@ -116,26 +133,27 @@ cordis_schema() %>%
 #> 12 fp7programmes        2 Title      VARCHAR FALSE   <NA>       FALSE
 #> 13 fp7programmes        3 ShortTitle VARCHAR FALSE   <NA>       FALSE
 #> 14 fp7programmes        4 Language   VARCHAR FALSE   <NA>       FALSE
-#> 15 fp7subprogrammes     0 col1       VARCHAR FALSE   <NA>       FALSE
-#> 16 fp7subprogrammes     1 col2       VARCHAR FALSE   <NA>       FALSE
-#> 17 fp7subprogrammes     2 col3       VARCHAR FALSE   <NA>       FALSE
-#> 18 fp7subprogrammes     3 col4       VARCHAR FALSE   <NA>       FALSE
-#> 19 fp7subprogrammes     4 col5       VARCHAR FALSE   <NA>       FALSE
-#> 20 fp7subprogrammes     5 col6       VARCHAR FALSE   <NA>       FALSE
+#> 15 fp7subprogrammes     0 id         INTEGER FALSE   <NA>       FALSE
+#> 16 fp7subprogrammes     1 cat_1      VARCHAR FALSE   <NA>       FALSE
+#> 17 fp7subprogrammes     2 cat_2      VARCHAR FALSE   <NA>       FALSE
+#> 18 fp7subprogrammes     3 cat_3      VARCHAR FALSE   <NA>       FALSE
+#> 19 fp7subprogrammes     4 cat_4      VARCHAR FALSE   <NA>       FALSE
+#> 20 fp7subprogrammes     5 cat_5      VARCHAR FALSE   <NA>       FALSE
 
 # get a connection
 con <- cordis_con()
+#> Connecting to /home/markus/.cache/cordis/cordisdb
 # remember to disconnect when done:
 # cordis_disconnect(con)
 
 # display first five rows with PI data
-con %>% tbl("pi") %>% 
+con %>% tbl("h2020_pi") %>% 
   head(5) %>% 
   knitr::kable()
 ```
 
 | projectId | projectAcronym      | fundingScheme | title | firstName | lastName        | organisationId |
-| --------: | :------------------ | :------------ | :---- | :-------- | :-------------- | -------------: |
+|----------:|:--------------------|:--------------|:------|:----------|:----------------|---------------:|
 |    633152 | GEOFLUIDS           | ERC-STG       | DR    | Alberto   | Enciso Carrasco |      999991722 |
 |    633428 | EngineeringPercepts | ERC-STG       | DR    | Marcel    | Oberlaender     |      974952433 |
 |    633509 | EXTPRO              | ERC-STG       | PROF  | Asaf      | Shapira         |      999901609 |
@@ -145,57 +163,57 @@ con %>% tbl("pi") %>%
 ``` r
 
 # display first row of projects info
-con %>% tbl("projects") %>% 
+con %>% tbl("he_project") %>% 
   head(1) %>% 
   glimpse()
 #> Rows: ??
-#> Columns: 21
-#> Database: duckdb_connection
-#> $ rcn                  <dbl> 197163
-#> $ id                   <dbl> 672890
-#> $ acronym              <chr> "TailorFit"
-#> $ status               <chr> "CLOSED"
-#> $ programme            <chr> "H2020-EU.2.3.1.;H2020-EU.2.1.2."
-#> $ topics               <chr> "NMP-25-2014-1"
-#> $ frameworkProgramme   <chr> "H2020"
-#> $ title                <chr> "TailorFit; The Integrated “made to measure” wor…
-#> $ startDate            <dttm> 2015-06-01
-#> $ endDate              <dttm> 2015-11-30
-#> $ projectUrl           <chr> "http://www.creasolution.com"
-#> $ objective            <chr> "'The project targets all luxury fashion firms t…
-#> $ totalCost            <dbl> 71429
-#> $ ecMaxContribution    <dbl> 50000
-#> $ call                 <chr> "H2020-SMEINST-1-2014"
-#> $ fundingScheme        <chr> "SME-1"
-#> $ coordinator          <chr> "CREA SOLUTION SRL"
-#> $ coordinatorCountry   <chr> "IT"
-#> $ participants         <chr> NA
-#> $ participantCountries <chr> NA
-#> $ subjects             <lgl> NA
+#> Columns: 20
+#> Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-137-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]
+#> $ id                 <dbl> 101043356
+#> $ acronym            <chr> "PROGRESS"
+#> $ status             <chr> "SIGNED"
+#> $ title              <chr> "Reading provenance from ubiquitous quartz:  unders…
+#> $ startDate          <date> 2023-01-01
+#> $ endDate            <date> 2027-12-31
+#> $ totalCost          <dbl> 2657500
+#> $ ecMaxContribution  <dbl> 2657500
+#> $ legalBasis         <chr> "HORIZON.1.1"
+#> $ topics             <chr> "ERC-2021-COG"
+#> $ ecSignatureDate    <date> 2022-09-21
+#> $ frameworkProgramme <chr> "HORIZON"
+#> $ masterCall         <chr> "ERC-2021-COG"
+#> $ subCall            <chr> "ERC-2021-COG"
+#> $ fundingScheme      <chr> "ERC"
+#> $ nature             <lgl> NA
+#> $ objective          <chr> "Quantitative provenance analysis studies are instr…
+#> $ contentUpdateDate  <dttm> 2022-09-28 12:21:14
+#> $ rcn                <dbl> 242239
+#> $ grantDoi           <chr> "10.3030/101043356"
 
 # display first row with publications data
-con %>% tbl("projectpublications") %>% 
+con %>% tbl("h2020_projectpublications") %>% 
   head(1) %>% 
   select(-starts_with("X")) %>% 
   glimpse()
 #> Rows: ??
-#> Columns: 15
-#> Database: duckdb_connection
-#> $ rcn            <dbl> 485081
-#> $ title          <chr> "Robustness of raman plasma amplifiers and their poten…
-#> $ projectID      <chr> "633053"
-#> $ projectAcronym <chr> "EUROfusion"
-#> $ legalBasis     <chr> "H2020-Euratom"
-#> $ topics         <chr> "EURATOM"
-#> $ authors        <chr> "James D. Sadler, Marcin Sliwa, Thomas Miller, Muhamma…
-#> $ journalTitle   <chr> "High Energy Density Physics"
-#> $ publishedYear  <chr> "2017"
-#> $ publishedPages <chr> "212-216"
-#> $ issn           <chr> "1574-1818"
-#> $ isbn           <chr> NA
-#> $ doi            <chr> "10.1016/j.hedp.2017.05.007"
-#> $ isPublishedAs  <chr> "PEER_REVIEWED_ARTICLE"
-#> $ lastUpdateDate <chr> "2020-09-10 11:06:25"
+#> Columns: 16
+#> Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-137-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]
+#> $ id                <chr> "771635_675336_PUBLI"
+#> $ title             <chr> "Debating the EU's Raison d'�tre: On the Relation be…
+#> $ isPublishedAs     <chr> "Peer reviewed articles"
+#> $ authors           <chr> "Andrea Sangiovanni"
+#> $ journalTitle      <chr> "JCMS: Journal of Common Market Studies"
+#> $ journalNumber     <chr> "57/1"
+#> $ publishedYear     <dbl> 2018
+#> $ publishedPages    <chr> "13-27"
+#> $ issn              <chr> "0021-9886"
+#> $ isbn              <chr> NA
+#> $ doi               <chr> "10.1111/jcms.12819"
+#> $ projectID         <dbl> 771635
+#> $ projectAcronym    <chr> "EUSOL"
+#> $ collection        <chr> "Project publication"
+#> $ contentUpdateDate <dttm> 2020-09-10 12:26:01
+#> $ rcn               <dbl> 621019
 
 cordis_disconnect(con)
 ```

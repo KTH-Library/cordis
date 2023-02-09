@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 # cordis
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/KTH-Library/cordis/workflows/R-CMD-check/badge.svg)](https://github.com/KTH-Library/cordis/actions)
+[![R-CMD-check](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `cordis` is to simplify data access to data from [CORDIS](https://cordis.europa.eu/), which is an acronym for the Community Research and Development Information Service. It is the European Commission's primary source of results from the projects funded by the EU's framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020. 
@@ -57,8 +57,9 @@ suppressPackageStartupMessages(library(dplyr))
 library(knitr)
 
 # tables in the database
-cordis_tables() %>%
-  arrange(desc(n_row))
+cordis_tables() |>
+  arrange(desc(n_row)) |>
+  print(n = 50)
 
 # database schema
 cordis_schema() %>%
@@ -70,17 +71,17 @@ con <- cordis_con()
 # cordis_disconnect(con)
 
 # display first five rows with PI data
-con %>% tbl("pi") %>% 
+con %>% tbl("h2020_pi") %>% 
   head(5) %>% 
   knitr::kable()
 
 # display first row of projects info
-con %>% tbl("projects") %>% 
+con %>% tbl("he_project") %>% 
   head(1) %>% 
   glimpse()
 
 # display first row with publications data
-con %>% tbl("projectpublications") %>% 
+con %>% tbl("h2020_projectpublications") %>% 
   head(1) %>% 
   select(-starts_with("X")) %>% 
   glimpse()
