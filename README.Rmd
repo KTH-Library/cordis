@@ -16,18 +16,25 @@ knitr::opts_chunk$set(
 # cordis
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/KTH-Library/cordis/workflows/R-CMD-check/badge.svg)](https://github.com/KTH-Library/cordis/actions)
+[![R-CMD-check](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `cordis` is to simplify data access to data from [CORDIS](https://cordis.europa.eu/), which is an acronym for the Community Research and Development Information Service. It is the European Commission's primary source of results from the projects funded by the EU's framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020. 
 
 ## Data preparation
 
-CORDIS makes data about European research projects available at various locations, such as https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects. The download speed is rate limited when working directly against these files, and file formats and compression are different. With some data preparation, these datasets can be loaded into a database, providing simplified and faster local access to the data.
+CORDIS makes open data about European research projects available at various locations, such as:
 
-In [`data-raw`](data-raw) there are data preparation scripts which download data from these locations into a local cache directory (`~/.cache/cordis`). A [duckdb](https://duckdb.org) database is built from these files and uploaded using [piggyback](https://github.com/ropensci/piggyback) to a GitHub repo at https://github.com/KTH-Library/cordis-data as a versioned GitHub Release. 
+- [Horizon Europe, 2021-2027](https://data.europa.eu/data/datasets/cordis-eu-research-projects-under-horizon-europe-2021-2027?locale=en)
+- [Horizon 2020, 2014-2020](https://data.europa.eu/88u/dataset/cordisH2020projects)
+- [FP7, 2007-2013](https://data.europa.eu/88u/dataset/cordisfp7projects)
+- [CORDIS reference data](http://data.europa.eu/data/datasets/cordisref-data)
 
-There is also a function for exporting the entire database in Parquet format, which allows moving the data for example to a [Minio](https://min.io/) server, where it can be accessed by other data integration tools like Apache Spark. Only package developers need to use these functions when preparing and updating the data.
+The download speed is rate limited when working directly against these files, and file formats and compression are different. With some data preparation, these datasets can be loaded into a database, providing simplified and faster local access to the data.
+
+In [`data-raw`](data-raw) there are data preparation scripts which download data from these locations into a local cache directory (`~/.cache/cordis`). A [duckdb](https://duckdb.org) database is built from these files and uploaded using [piggyback](https://github.com/ropensci/piggyback) to a [cordis-data GitHub repo](https://github.com/KTH-Library/cordis-data) as a versioned GitHub Release. 
+
+There is also a function for exporting the entire database in Parquet format, which allows moving the data for example to a [Minio](https://min.io/) server, where it can be accessed by other data integration tools like duckdb, Arrow, Apache Spark etc. Only package developers need to use these functions when preparing and updating the data.
 
 ## Usage
 
@@ -49,40 +56,91 @@ cordis_import()
 
 ## Example
 
-This is a basic example which shows you how to work with the data:
+This is a basic example which shows you how to work with the data.
+
+### Schema and available tables
+
+Goal: show how to list the available tables and schema
 
 ```{r example}
 library(cordis)
 suppressPackageStartupMessages(library(dplyr))
 library(knitr)
 
-# tables in the database
-cordis_tables() %>%
-  arrange(desc(n_row))
+# tables in the database, prefixed with ....
+# "ref" (reference data from CORDIS)
+# "he" (Horizon Europe)
+# "fp7" (FP7)
+# "h2020" (Horizon 2020).
+
+cordis_tables() |>
+  arrange(desc(n_row)) |>
+  print(n = 50)
 
 # database schema
 cordis_schema() %>%
   head(20)
+```
 
+### Data from CORDIS projects
+
+Goal: To show how to work with data for Horizon Europe projects.
+
+```{r}
 # get a connection
 con <- cordis_con()
+
 # remember to disconnect when done:
 # cordis_disconnect(con)
 
-# display first five rows with PI data
-con %>% tbl("pi") %>% 
-  head(5) %>% 
-  knitr::kable()
+# these tables are of primary interest
+cordis_tables() |>
+  filter(grepl("^he_", table))
 
 # display first row of projects info
-con %>% tbl("projects") %>% 
-  head(1) %>% 
-  glimpse()
+con |> tbl("he_project") |> head(1) |> glimpse()
+
+# display first five rows with PI data, exclude title and objective
+con |> tbl("he_project") |> 
+  select(-c("objective", "title")) |> 
+  head(5) |> knitr::kable()
 
 # display first row with publications data
-con %>% tbl("projectpublications") %>% 
-  head(1) %>% 
-  select(-starts_with("X")) %>% 
+con |> tbl("he_projectDeliverables") |> 
+  head(1) |>
+  select(-starts_with("X")) |>
+  glimpse()
+
+cordis_disconnect(con)
+
+```
+Tables for Horizon 2020, FP7 etc are also available, as well as "reference data".
+
+### Data from CORDIS reference data
+
+These datasets provide "reference data" for FP6, FP7, Horizon 2020 projects, see this [source](https://data.europa.eu/api/hub/search/en/feeds/datasets/cordisref-data.rss)
+
+Goal: Show how to work with reference data related to Horizon 2020 projects
+
+```{r}
+# get a connection
+con <- cordis_con()
+
+# remember to disconnect when done:
+# cordis_disconnect(con)
+
+# use any of these tables
+cordis_tables() |> filter(grepl("^ref_", table))
+
+# display first five rows with PI data
+con |> tbl("h2020_pi") |> head(5) |> knitr::kable()
+
+# display first row of projects info
+con |> tbl("h2020_project") |> head(1) |> glimpse()
+
+# display first row with publications data
+con |> tbl("h2020_projectPublications") |> 
+  head(1) |>
   glimpse()
 
 cordis_disconnect(con)

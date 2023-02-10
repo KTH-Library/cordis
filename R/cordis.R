@@ -52,10 +52,11 @@ cordis_meta <- function() {
 #' con %>% tbl("projectPublications")
 #' }
 #' @export
-#' @importFrom duckdb dbConnect duckdb
+#' @import duckdb
 cordis_con <- function() {
-  dbfile <- normalizePath(file.path(cachedir(), "cordisdb"))
-  duckdb::dbConnect(duckdb::duckdb(dbfile))
+  dbfile <- normalizePath(file.path(cachedir(), "cordisdb"), NA) |> suppressWarnings()
+  #message("Connecting to ", dbfile)
+  dbConnect(duckdb(dbdir = dbfile))
 }
 
 #' @title CORDIS tables
@@ -143,20 +144,26 @@ cordis_export <- function(destdir, overwrite = FALSE) {
 #' @importFrom purrr map
 #' @importFrom DBI dbExecute
 cordis_import <- function(repo_slug = "kth-library/cordis-data",
-                          refresh = FALSE, verbose = TRUE, version = "0.0.1") {
+                          refresh = FALSE, verbose = TRUE, version = "v0.2.0") {
 
   dldir <- normalizePath(file.path(cachedir(), "temp"))
 
-  if (dir.exists(dldir) && !refresh)
-    stop("Directory ", dldir, " already exits, pls retry with refresh=TRUE")
+  if (dir.exists(dldir) && !refresh) {
+    message("Directory ", dldir, " already exits, for fresh data download, retry with refresh=TRUE")
+  }
 
   if (refresh) unlink(dldir, recursive = TRUE)
   if (!dir.exists(dldir)) dir.create(dldir, recursive = TRUE)
 
   repo <- repo_slug
-  piggyback::pb_download(repo = repo, dest = dldir, tag = version)
 
-  urlz <- piggyback::pb_download_url(repo = repo, tag = version)
+  if (refresh) {
+    piggyback::pb_download(show_progress = TRUE, file = NULL,
+      repo = repo, dest = dldir, tag = version)
+    # urlz <- piggyback::pb_download_url(repo = repo, tag = version)
+  }
+
+  message("Parquet files are in ", dldir, ", populating database ...")
 
   sql <- sprintf(
     "CREATE TABLE IF NOT EXISTS %s AS SELECT * FROM parquet_scan('%s');",
@@ -174,3 +181,7 @@ cordis_import <- function(repo_slug = "kth-library/cordis-data",
   return(invisible(length(res) > 0))
 }
 
+cordis_dropdb <- function(confirm = FALSE) {
+  stopifnot(confirm)
+  unlink(dbfile())
+}
