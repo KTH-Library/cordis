@@ -18,4 +18,5 @@ Imports:
     DBI,
     magrittr,
     piggyback
-URL: https://kth-library.github.io/cordis
+URL: https://kth-library.github.io/cordis,
+    https://kth-library.github.io/cordis/
