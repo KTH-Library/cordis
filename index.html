@@ -5,13 +5,13 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Data From CORDIS • cordis</title>
+<title>Data from CORDIS • cordis</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Data From CORDIS">
+<script src="pkgdown.js"></script><meta property="og:title" content="Data from CORDIS">
 <meta property="og:description" content="Provides access to open data from the European Union about 
     projects, funding, organizations, publications etc.">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -20,6 +20,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -32,18 +34,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">cordis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -60,104 +56,401 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="cordis" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#cordis" class="anchor"></a>cordis</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="cordis">cordis<a class="anchor" aria-label="anchor" href="#cordis"></a>
+</h1></div>
 <!-- badges: start -->
 
-<p>The goal of <code>cordis</code> is to simplify data access to data from <a href="https://cordis.europa.eu/">CORDIS</a>, which is an acronym for the Community Research and Development Information Service. It is the European Commission’s primary source of results from the projects funded by the EU’s framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020.</p>
-<div id="data-preparation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data-preparation" class="anchor"></a>Data preparation</h2>
-<p>CORDIS makes data about European research projects available at various locations, such as <a href="https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects" class="uri">https://data.europa.eu/euodp/en/data/dataset/cordisH2020projects</a>. The download speed is rate limited when working directly against these files, and file formats and compression are different. With some data preparation, these datasets can be loaded into a database, providing simplified and faster local access to the data.</p>
-<p>In <a href="data-raw"><code>data-raw</code></a> there are data preparation scripts which download data from these locations into a local cache directory (<code>~/.cache/cordis</code>). A <a href="https://duckdb.org">duckdb</a> database is built from these files and uploaded using <a href="https://github.com/ropensci/piggyback">piggyback</a> to a GitHub repo at <a href="https://github.com/KTH-Library/cordis-data" class="uri">https://github.com/KTH-Library/cordis-data</a> as a versioned GitHub Release.</p>
-<p>There is also a function for exporting the entire database in Parquet format, which allows moving the data for example to a <a href="https://min.io/">Minio</a> server, where it can be accessed by other data integration tools like Apache Spark. Only package developers need to use these functions when preparing and updating the data.</p>
+<p>The goal of <code>cordis</code> is to simplify data access to data from <a href="https://cordis.europa.eu/" class="external-link">CORDIS</a>, which is an acronym for the Community Research and Development Information Service. It is the European Commission’s primary source of results from the projects funded by the EU’s framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020.</p>
+<div class="section level2">
+<h2 id="data-preparation">Data preparation<a class="anchor" aria-label="anchor" href="#data-preparation"></a>
+</h2>
+<p>CORDIS makes open data about European research projects available at various locations, such as:</p>
+<ul>
+<li><a href="https://data.europa.eu/data/datasets/cordis-eu-research-projects-under-horizon-europe-2021-2027?locale=en" class="external-link">Horizon Europe, 2021-2027</a></li>
+<li><a href="https://data.europa.eu/88u/dataset/cordisH2020projects" class="external-link">Horizon 2020, 2014-2020</a></li>
+<li><a href="https://data.europa.eu/88u/dataset/cordisfp7projects" class="external-link">FP7, 2007-2013</a></li>
+<li><a href="http://data.europa.eu/data/datasets/cordisref-data" class="external-link">CORDIS reference data</a></li>
+</ul>
+<p>The download speed is rate limited when working directly against these files, and file formats and compression are different. With some data preparation, these datasets can be loaded into a database, providing simplified and faster local access to the data.</p>
+<p>In <a href="data-raw"><code>data-raw</code></a> there are data preparation scripts which download data from these locations into a local cache directory (<code>~/.cache/cordis</code>). A <a href="https://duckdb.org" class="external-link">duckdb</a> database is built from these files and uploaded using <a href="https://github.com/ropensci/piggyback" class="external-link">piggyback</a> to a <a href="https://github.com/KTH-Library/cordis-data" class="external-link">cordis-data GitHub repo</a> as a versioned GitHub Release.</p>
+<p>There is also a function for exporting the entire database in Parquet format, which allows moving the data for example to a <a href="https://min.io/" class="external-link">Minio</a> server, where it can be accessed by other data integration tools like duckdb, Arrow, Apache Spark etc. Only package developers need to use these functions when preparing and updating the data.</p>
 </div>
-<div id="usage" class="section level2">
-<h2 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h2>
+<div class="section level2">
+<h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h2>
 <p>The data in the “github releases” location mentioned above can be installed locally by regular package users by running “cordis_import()”, a function for importing the data from the data repository. This needs to be done once. The download and upload rate is good.</p>
 <p>Users can then make a connection to the database locally. This allows arbitrary in-process data processing with tidyverse tools such as dplyr.</p>
 <p>Convenience functions allows for inspecting the database schema / finding table and field names.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
-<p>You can install the released version of <code>cordis</code> from <a href="https://github.com/KTH-Library/cordis">GitHub</a> with:</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the released version of <code>cordis</code> from <a href="https://github.com/KTH-Library/cordis" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"KTH-Library/cordis"</span><span class="op">)</span>
-<span class="co"># run once to install local data</span>
-<span class="fu"><a href="reference/cordis_import.html">cordis_import</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"KTH-Library/cordis"</span><span class="op">)</span></span>
+<span><span class="co"># run once to install local data</span></span>
+<span><span class="fu"><a href="reference/cordis_import.html">cordis_import</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="example" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example" class="anchor"></a>Example</h2>
-<p>This is a basic example which shows you how to work with the data:</p>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<p>This is a basic example which shows you how to work with the data.</p>
+<div class="section level3">
+<h3 id="schema-and-available-tables">Schema and available tables<a class="anchor" aria-label="anchor" href="#schema-and-available-tables"></a>
+</h3>
+<p>Goal: show how to list the available tables and schema</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://kth-library.github.io/cordis">cordis</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/message.html">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/">knitr</a></span><span class="op">)</span>
-
-<span class="co"># tables in the database</span>
-<span class="fu"><a href="reference/cordis_tables.html">cordis_tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">n_row</span><span class="op">)</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 16 x 2</span>
-<span class="co">#&gt;    table                          n_row</span>
-<span class="co">#&gt;    &lt;chr&gt;                          &lt;dbl&gt;</span>
-<span class="co">#&gt;  1 scoreboard                   1048576</span>
-<span class="co">#&gt;  2 projectpublications           161524</span>
-<span class="co">#&gt;  3 organizations                 150287</span>
-<span class="co">#&gt;  4 projectdeliverables            84323</span>
-<span class="co">#&gt;  5 projects                       32161</span>
-<span class="co">#&gt;  6 reports                        19295</span>
-<span class="co">#&gt;  7 pi                              7525</span>
-<span class="co">#&gt;  8 fp7programmes                   6233</span>
-<span class="co">#&gt;  9 fp7subprogrammes                6096</span>
-<span class="co">#&gt; 10 h2020topics                     3878</span>
-<span class="co">#&gt; 11 fp6programmes                   2027</span>
-<span class="co">#&gt; 12 countries                       1503</span>
-<span class="co">#&gt; 13 h2020programmes                  909</span>
-<span class="co">#&gt; 14 siccode                          426</span>
-<span class="co">#&gt; 15 projectfundingschemecategory     187</span>
-<span class="co">#&gt; 16 organizationactivitytype           5</span>
-
-<span class="co"># database schema</span>
-<span class="fu"><a href="reference/cordis_schema.html">cordis_schema</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 20 x 7</span>
-<span class="co">#&gt;    tablename          cid name       type    notnull dflt_value pk   </span>
-<span class="co">#&gt;    &lt;chr&gt;            &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;   &lt;lgl&gt;   &lt;chr&gt;      &lt;lgl&gt;</span>
-<span class="co">#&gt;  1 countries            0 euCode     VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  2 countries            1 isoCode    VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  3 countries            2 name       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  4 countries            3 language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  5 fp6programmes        0 rcn        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  6 fp6programmes        1 code       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  7 fp6programmes        2 title      VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  8 fp6programmes        3 shortTitle VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt;  9 fp6programmes        4 language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 10 fp7programmes        0 RCN        DOUBLE  FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 11 fp7programmes        1 Code       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 12 fp7programmes        2 Title      VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 13 fp7programmes        3 ShortTitle VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 14 fp7programmes        4 Language   VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 15 fp7subprogrammes     0 col1       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 16 fp7subprogrammes     1 col2       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 17 fp7subprogrammes     2 col3       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 18 fp7subprogrammes     3 col4       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 19 fp7subprogrammes     4 col5       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-<span class="co">#&gt; 20 fp7subprogrammes     5 col6       VARCHAR FALSE   &lt;NA&gt;       FALSE</span>
-
-<span class="co"># get a connection</span>
-<span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cordis_con.html">cordis_con</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co"># remember to disconnect when done:</span>
-<span class="co"># cordis_disconnect(con)</span>
-
-<span class="co"># display first five rows with PI data</span>
-<span class="va">con</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="st">"pi"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html">kable</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<table class="table">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kth-library.github.io/cordis">cordis</a></span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressPackageStartupMessages</a></span><span class="op">(</span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># tables in the database, prefixed with ....</span></span>
+<span><span class="co"># "ref" (reference data from CORDIS)</span></span>
+<span><span class="co"># "he" (Horizon Europe)</span></span>
+<span><span class="co"># "fp7" (FP7)</span></span>
+<span><span class="co"># "h2020" (Horizon 2020).</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/cordis_tables.html">cordis_tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n_row</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 41 × 2</span></span>
+<span><span class="co">#&gt;    table                              n_row</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                              &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 h2020_scoreboard                 1048576</span></span>
+<span><span class="co">#&gt;  2 h2020_projectPublications         318740</span></span>
+<span><span class="co">#&gt;  3 fp7_dm_proj_publications          305549</span></span>
+<span><span class="co">#&gt;  4 h2020_organization                177078</span></span>
+<span><span class="co">#&gt;  5 h2020_webLink                     162178</span></span>
+<span><span class="co">#&gt;  6 fp7_organization                  140055</span></span>
+<span><span class="co">#&gt;  7 h2020_projectDeliverables         137319</span></span>
+<span><span class="co">#&gt;  8 h2020_euroSciVoc                  122551</span></span>
+<span><span class="co">#&gt;  9 fp7_euroSciVoc                     68651</span></span>
+<span><span class="co">#&gt; 10 h2020_legalBasis                   65784</span></span>
+<span><span class="co">#&gt; 11 he_organization                    36680</span></span>
+<span><span class="co">#&gt; 12 h2020_project                      35382</span></span>
+<span><span class="co">#&gt; 13 h2020_topics                       35382</span></span>
+<span><span class="co">#&gt; 14 h2020_reportSummaries              27082</span></span>
+<span><span class="co">#&gt; 15 fp7_topics                         26153</span></span>
+<span><span class="co">#&gt; 16 fp7_legalBasis                     25785</span></span>
+<span><span class="co">#&gt; 17 fp7_project                        25785</span></span>
+<span><span class="co">#&gt; 18 fp7_reportSummaries                21606</span></span>
+<span><span class="co">#&gt; 19 he_euroSciVoc                      15810</span></span>
+<span><span class="co">#&gt; 20 fp7_webItem                        11767</span></span>
+<span><span class="co">#&gt; 21 h2020_pi                            8043</span></span>
+<span><span class="co">#&gt; 22 fp7_webLink                         7989</span></span>
+<span><span class="co">#&gt; 23 he_legalBasis                       7657</span></span>
+<span><span class="co">#&gt; 24 ref_fp7programmes                   6233</span></span>
+<span><span class="co">#&gt; 25 ref_fp7subprogrammes                6096</span></span>
+<span><span class="co">#&gt; 26 fp7_projectirps                     5293</span></span>
+<span><span class="co">#&gt; 27 he_project                          5250</span></span>
+<span><span class="co">#&gt; 28 he_topics                           5250</span></span>
+<span><span class="co">#&gt; 29 ref_h2020programmes                 3905</span></span>
+<span><span class="co">#&gt; 30 ref_h2020topics                     3905</span></span>
+<span><span class="co">#&gt; 31 ref_h2020topicKeywords              2562</span></span>
+<span><span class="co">#&gt; 32 h2020_projectIrps                   2324</span></span>
+<span><span class="co">#&gt; 33 ref_horizontopics                   2047</span></span>
+<span><span class="co">#&gt; 34 ref_fp6programmes                   2027</span></span>
+<span><span class="co">#&gt; 35 ref_countries                       1503</span></span>
+<span><span class="co">#&gt; 36 he_webLink                           241</span></span>
+<span><span class="co">#&gt; 37 he_projectDeliverables               205</span></span>
+<span><span class="co">#&gt; 38 ref_projectfundingschemecategory     187</span></span>
+<span><span class="co">#&gt; 39 ref_horizonprogrammes                123</span></span>
+<span><span class="co">#&gt; 40 h2020_webItem                          9</span></span>
+<span><span class="co">#&gt; 41 ref_organizationactivitytype           5</span></span>
+<span></span>
+<span><span class="co"># database schema</span></span>
+<span><span class="fu"><a href="reference/cordis_schema.html">cordis_schema</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 20 × 7</span></span>
+<span><span class="co">#&gt;    tablename                  cid name               type  notnull dflt_…¹ pk   </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;              &lt;chr&gt; &lt;lgl&gt;   &lt;chr&gt;   &lt;lgl&gt;</span></span>
+<span><span class="co">#&gt;  1 fp7_dm_proj_publications     0 PROJECT_ID         DOUB… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  2 fp7_dm_proj_publications     1 TITLE              VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  3 fp7_dm_proj_publications     2 AUTHOR             VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  4 fp7_dm_proj_publications     3 DOI                VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  5 fp7_dm_proj_publications     4 PUBLICATION_TYPE   VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  6 fp7_dm_proj_publications     5 REPOSITORY_URL     VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  7 fp7_dm_proj_publications     6 JOURNAL_TITLE      VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  8 fp7_dm_proj_publications     7 PUBLISHER          VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt;  9 fp7_dm_proj_publications     8 VOLUME             VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 10 fp7_dm_proj_publications     9 PAGES              VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 11 fp7_dm_proj_publications    10 QA_PROCESSED_DOI   VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 12 fp7_dm_proj_publications    11 RECORD_ID          VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 13 fp7_euroSciVoc               0 projectID          DOUB… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 14 fp7_euroSciVoc               1 euroSciVocCode     VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 15 fp7_euroSciVoc               2 euroSciVocPath     VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 16 fp7_euroSciVoc               3 euroSciVocTitle    VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 17 fp7_euroSciVoc               4 euroSciVocDescrip… BOOL… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 18 fp7_legalBasis               0 projectID          DOUB… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 19 fp7_legalBasis               1 legalBasis         VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; 20 fp7_legalBasis               2 title              VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
+<span><span class="co">#&gt; # … with abbreviated variable name ¹​dflt_value</span></span></code></pre></div>
+</div>
+<div class="section level3">
+<h3 id="data-from-cordis-projects">Data from CORDIS projects<a class="anchor" aria-label="anchor" href="#data-from-cordis-projects"></a>
+</h3>
+<p>Goal: To show how to work with data for Horizon Europe projects.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get a connection</span></span>
+<span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cordis_con.html">cordis_con</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># remember to disconnect when done:</span></span>
+<span><span class="co"># cordis_disconnect(con)</span></span>
+<span></span>
+<span><span class="co"># these tables are of primary interest</span></span>
+<span><span class="fu"><a href="reference/cordis_tables.html">cordis_tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^he_"</span>, <span class="va">table</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 7 × 2</span></span>
+<span><span class="co">#&gt;   table                  n_row</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;                  &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt; 1 he_euroSciVoc          15810</span></span>
+<span><span class="co">#&gt; 2 he_legalBasis           7657</span></span>
+<span><span class="co">#&gt; 3 he_organization        36680</span></span>
+<span><span class="co">#&gt; 4 he_project              5250</span></span>
+<span><span class="co">#&gt; 5 he_projectDeliverables   205</span></span>
+<span><span class="co">#&gt; 6 he_topics               5250</span></span>
+<span><span class="co">#&gt; 7 he_webLink               241</span></span>
+<span></span>
+<span><span class="co"># display first row of projects info</span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"he_project"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: ??</span></span>
+<span><span class="co">#&gt; Columns: 20</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                 &lt;dbl&gt; 101043356</span></span>
+<span><span class="co">#&gt; $ acronym            &lt;chr&gt; "PROGRESS"</span></span>
+<span><span class="co">#&gt; $ status             &lt;chr&gt; "SIGNED"</span></span>
+<span><span class="co">#&gt; $ title              &lt;chr&gt; "Reading provenance from ubiquitous quartz:  unders…</span></span>
+<span><span class="co">#&gt; $ startDate          &lt;date&gt; 2023-01-01</span></span>
+<span><span class="co">#&gt; $ endDate            &lt;date&gt; 2027-12-31</span></span>
+<span><span class="co">#&gt; $ totalCost          &lt;dbl&gt; 2657500</span></span>
+<span><span class="co">#&gt; $ ecMaxContribution  &lt;dbl&gt; 2657500</span></span>
+<span><span class="co">#&gt; $ legalBasis         &lt;chr&gt; "HORIZON.1.1"</span></span>
+<span><span class="co">#&gt; $ topics             &lt;chr&gt; "ERC-2021-COG"</span></span>
+<span><span class="co">#&gt; $ ecSignatureDate    &lt;date&gt; 2022-09-21</span></span>
+<span><span class="co">#&gt; $ frameworkProgramme &lt;chr&gt; "HORIZON"</span></span>
+<span><span class="co">#&gt; $ masterCall         &lt;chr&gt; "ERC-2021-COG"</span></span>
+<span><span class="co">#&gt; $ subCall            &lt;chr&gt; "ERC-2021-COG"</span></span>
+<span><span class="co">#&gt; $ fundingScheme      &lt;chr&gt; "ERC"</span></span>
+<span><span class="co">#&gt; $ nature             &lt;lgl&gt; NA</span></span>
+<span><span class="co">#&gt; $ objective          &lt;chr&gt; "Quantitative provenance analysis studies are instr…</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate  &lt;dttm&gt; 2022-09-28 12:21:14</span></span>
+<span><span class="co">#&gt; $ rcn                &lt;dbl&gt; 242239</span></span>
+<span><span class="co">#&gt; $ grantDoi           &lt;chr&gt; "10.3030/101043356"</span></span>
+<span></span>
+<span><span class="co"># display first five rows with PI data, exclude title and objective</span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"he_project"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"objective"</span>, <span class="st">"title"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="3%">
+<col width="4%">
+<col width="2%">
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="6%">
+<col width="4%">
+<col width="11%">
+<col width="5%">
+<col width="6%">
+<col width="10%">
+<col width="10%">
+<col width="4%">
+<col width="2%">
+<col width="6%">
+<col width="2%">
+<col width="6%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">id</th>
+<th align="left">acronym</th>
+<th align="left">status</th>
+<th align="left">startDate</th>
+<th align="left">endDate</th>
+<th align="right">totalCost</th>
+<th align="right">ecMaxContribution</th>
+<th align="left">legalBasis</th>
+<th align="left">topics</th>
+<th align="left">ecSignatureDate</th>
+<th align="left">frameworkProgramme</th>
+<th align="left">masterCall</th>
+<th align="left">subCall</th>
+<th align="left">fundingScheme</th>
+<th align="left">nature</th>
+<th align="left">contentUpdateDate</th>
+<th align="right">rcn</th>
+<th align="left">grantDoi</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">101043356</td>
+<td align="left">PROGRESS</td>
+<td align="left">SIGNED</td>
+<td align="left">2023-01-01</td>
+<td align="left">2027-12-31</td>
+<td align="right">2657500</td>
+<td align="right">2657500</td>
+<td align="left">HORIZON.1.1</td>
+<td align="left">ERC-2021-COG</td>
+<td align="left">2022-09-21</td>
+<td align="left">HORIZON</td>
+<td align="left">ERC-2021-COG</td>
+<td align="left">ERC-2021-COG</td>
+<td align="left">ERC</td>
+<td align="left">NA</td>
+<td align="left">2022-09-28 12:21:14</td>
+<td align="right">242239</td>
+<td align="left">10.3030/101043356</td>
+</tr>
+<tr class="even">
+<td align="right">101100999</td>
+<td align="left">SCOPE</td>
+<td align="left">SIGNED</td>
+<td align="left">2022-09-01</td>
+<td align="left">2024-02-29</td>
+<td align="right">0</td>
+<td align="right">150000</td>
+<td align="left">HORIZON.1.1</td>
+<td align="left">ERC-2022-POC2</td>
+<td align="left">2022-09-29</td>
+<td align="left">HORIZON</td>
+<td align="left">ERC-2022-POC2</td>
+<td align="left">ERC-2022-POC2</td>
+<td align="left">ERC-POC</td>
+<td align="left">NA</td>
+<td align="left">2022-10-06 17:58:49</td>
+<td align="right">242302</td>
+<td align="left">10.3030/101100999</td>
+</tr>
+<tr class="odd">
+<td align="right">101057802</td>
+<td align="left">e-IRGSP7</td>
+<td align="left">SIGNED</td>
+<td align="left">2022-04-01</td>
+<td align="left">2023-09-30</td>
+<td align="right">302260</td>
+<td align="right">302259</td>
+<td align="left">HORIZON.1.3</td>
+<td align="left">HORIZON-INFRA-2021-DEV-01-05</td>
+<td align="left">2022-03-28</td>
+<td align="left">HORIZON</td>
+<td align="left">HORIZON-INFRA-2021-DEV-01</td>
+<td align="left">HORIZON-INFRA-2021-DEV-01</td>
+<td align="left">CSA</td>
+<td align="left">NA</td>
+<td align="left">2022-09-04 13:39:32</td>
+<td align="right">241435</td>
+<td align="left">10.3030/101057802</td>
+</tr>
+<tr class="even">
+<td align="right">190100375</td>
+<td align="left">EOinTime</td>
+<td align="left">SIGNED</td>
+<td align="left">2022-10-01</td>
+<td align="left">2024-03-31</td>
+<td align="right">2489000</td>
+<td align="right">1735300</td>
+<td align="left">HORIZON.3.1</td>
+<td align="left">HORIZON-EIC-2022-ACCELERATOROPEN-01</td>
+<td align="left">2022-09-20</td>
+<td align="left">HORIZON</td>
+<td align="left">HORIZON-EIC-2022-ACCELERATOR-01</td>
+<td align="left">HORIZON-EIC-2022-ACCELERATOR-01</td>
+<td align="left">HORIZON-AG</td>
+<td align="left">NA</td>
+<td align="left">2022-09-27 17:17:17</td>
+<td align="right">242179</td>
+<td align="left">10.3030/190100375</td>
+</tr>
+<tr class="odd">
+<td align="right">101073222</td>
+<td align="left">BosomShield</td>
+<td align="left">SIGNED</td>
+<td align="left">2022-09-01</td>
+<td align="left">2026-08-31</td>
+<td align="right">0</td>
+<td align="right">25953552</td>
+<td align="left">HORIZON.1.2</td>
+<td align="left">HORIZON-MSCA-2021-DN-01-01</td>
+<td align="left">2022-07-06</td>
+<td align="left">HORIZON</td>
+<td align="left">HORIZON-MSCA-2021-DN-01</td>
+<td align="left">HORIZON-MSCA-2021-DN-01</td>
+<td align="left">HORIZON-AG-UN</td>
+<td align="left">NA</td>
+<td align="left">2022-09-12 16:42:49</td>
+<td align="right">241045</td>
+<td align="left">10.3030/101073222</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># display first row with publications data</span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"he_projectDeliverables"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html" class="external-link">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html" class="external-link">starts_with</a></span><span class="op">(</span><span class="st">"X"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: ??</span></span>
+<span><span class="co">#&gt; Columns: 10</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                &lt;chr&gt; "101069941_27_DELIVHORIZON"</span></span>
+<span><span class="co">#&gt; $ title             &lt;chr&gt; "Project Website, Corporate identity and general tem…</span></span>
+<span><span class="co">#&gt; $ deliverableType   &lt;chr&gt; "Websites, patent fillings, videos etc."</span></span>
+<span><span class="co">#&gt; $ description       &lt;chr&gt; "Provision of the logo and the templates to be used …</span></span>
+<span><span class="co">#&gt; $ projectID         &lt;dbl&gt; 101069941</span></span>
+<span><span class="co">#&gt; $ projectAcronym    &lt;chr&gt; "PLOTO"</span></span>
+<span><span class="co">#&gt; $ url               &lt;chr&gt; "https://ec.europa.eu/research/participants/document…</span></span>
+<span><span class="co">#&gt; $ collection        &lt;chr&gt; "Project deliverable"</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate &lt;dttm&gt; 2022-12-26 19:05:16</span></span>
+<span><span class="co">#&gt; $ rcn               &lt;dbl&gt; 902856</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/cordis_disconnect.html">cordis_disconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></code></pre></div>
+<p>Tables for Horizon 2020, FP7 etc are also available, as well as “reference data”.</p>
+</div>
+<div class="section level3">
+<h3 id="data-from-cordis-reference-data">Data from CORDIS reference data<a class="anchor" aria-label="anchor" href="#data-from-cordis-reference-data"></a>
+</h3>
+<p>These datasets provide “reference data” for FP6, FP7, Horizon 2020 projects, see this <a href="https://data.europa.eu/api/hub/search/en/feeds/datasets/cordisref-data.rss" class="external-link">source</a></p>
+<p>Goal: Show how to work with reference data related to Horizon 2020 projects</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># get a connection</span></span>
+<span><span class="va">con</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cordis_con.html">cordis_con</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># remember to disconnect when done:</span></span>
+<span><span class="co"># cordis_disconnect(con)</span></span>
+<span></span>
+<span><span class="co"># use any of these tables</span></span>
+<span><span class="fu"><a href="reference/cordis_tables.html">cordis_tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^ref_"</span>, <span class="va">table</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 11 × 2</span></span>
+<span><span class="co">#&gt;    table                            n_row</span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                            &lt;dbl&gt;</span></span>
+<span><span class="co">#&gt;  1 ref_countries                     1503</span></span>
+<span><span class="co">#&gt;  2 ref_fp6programmes                 2027</span></span>
+<span><span class="co">#&gt;  3 ref_fp7programmes                 6233</span></span>
+<span><span class="co">#&gt;  4 ref_fp7subprogrammes              6096</span></span>
+<span><span class="co">#&gt;  5 ref_h2020programmes               3905</span></span>
+<span><span class="co">#&gt;  6 ref_h2020topicKeywords            2562</span></span>
+<span><span class="co">#&gt;  7 ref_h2020topics                   3905</span></span>
+<span><span class="co">#&gt;  8 ref_horizonprogrammes              123</span></span>
+<span><span class="co">#&gt;  9 ref_horizontopics                 2047</span></span>
+<span><span class="co">#&gt; 10 ref_organizationactivitytype         5</span></span>
+<span><span class="co">#&gt; 11 ref_projectfundingschemecategory   187</span></span>
+<span></span>
+<span><span class="co"># display first five rows with PI data</span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"h2020_pi"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table style="width:100%;" class="table">
+<colgroup>
+<col width="11%">
+<col width="21%">
+<col width="15%">
+<col width="7%">
+<col width="11%">
+<col width="17%">
+<col width="16%">
+</colgroup>
 <thead><tr class="header">
 <th align="right">projectId</th>
 <th align="left">projectAcronym</th>
@@ -215,97 +508,107 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="co"># display first row of projects info</span>
-<span class="va">con</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="st">"projects"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Rows: ??</span>
-<span class="co">#&gt; Columns: 21</span>
-<span class="co">#&gt; Database: duckdb_connection</span>
-<span class="co">#&gt; $ rcn                  &lt;dbl&gt; 197163</span>
-<span class="co">#&gt; $ id                   &lt;dbl&gt; 672890</span>
-<span class="co">#&gt; $ acronym              &lt;chr&gt; "TailorFit"</span>
-<span class="co">#&gt; $ status               &lt;chr&gt; "CLOSED"</span>
-<span class="co">#&gt; $ programme            &lt;chr&gt; "H2020-EU.2.3.1.;H2020-EU.2.1.2."</span>
-<span class="co">#&gt; $ topics               &lt;chr&gt; "NMP-25-2014-1"</span>
-<span class="co">#&gt; $ frameworkProgramme   &lt;chr&gt; "H2020"</span>
-<span class="co">#&gt; $ title                &lt;chr&gt; "TailorFit; The Integrated “made to measure” wor…</span>
-<span class="co">#&gt; $ startDate            &lt;dttm&gt; 2015-06-01</span>
-<span class="co">#&gt; $ endDate              &lt;dttm&gt; 2015-11-30</span>
-<span class="co">#&gt; $ projectUrl           &lt;chr&gt; "http://www.creasolution.com"</span>
-<span class="co">#&gt; $ objective            &lt;chr&gt; "'The project targets all luxury fashion firms t…</span>
-<span class="co">#&gt; $ totalCost            &lt;dbl&gt; 71429</span>
-<span class="co">#&gt; $ ecMaxContribution    &lt;dbl&gt; 50000</span>
-<span class="co">#&gt; $ call                 &lt;chr&gt; "H2020-SMEINST-1-2014"</span>
-<span class="co">#&gt; $ fundingScheme        &lt;chr&gt; "SME-1"</span>
-<span class="co">#&gt; $ coordinator          &lt;chr&gt; "CREA SOLUTION SRL"</span>
-<span class="co">#&gt; $ coordinatorCountry   &lt;chr&gt; "IT"</span>
-<span class="co">#&gt; $ participants         &lt;chr&gt; NA</span>
-<span class="co">#&gt; $ participantCountries &lt;chr&gt; NA</span>
-<span class="co">#&gt; $ subjects             &lt;lgl&gt; NA</span>
-
-<span class="co"># display first row with publications data</span>
-<span class="va">con</span> <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html">tbl</a></span><span class="op">(</span><span class="st">"projectpublications"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/starts_with.html">starts_with</a></span><span class="op">(</span><span class="st">"X"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; Rows: ??</span>
-<span class="co">#&gt; Columns: 15</span>
-<span class="co">#&gt; Database: duckdb_connection</span>
-<span class="co">#&gt; $ rcn            &lt;dbl&gt; 485081</span>
-<span class="co">#&gt; $ title          &lt;chr&gt; "Robustness of raman plasma amplifiers and their poten…</span>
-<span class="co">#&gt; $ projectID      &lt;chr&gt; "633053"</span>
-<span class="co">#&gt; $ projectAcronym &lt;chr&gt; "EUROfusion"</span>
-<span class="co">#&gt; $ legalBasis     &lt;chr&gt; "H2020-Euratom"</span>
-<span class="co">#&gt; $ topics         &lt;chr&gt; "EURATOM"</span>
-<span class="co">#&gt; $ authors        &lt;chr&gt; "James D. Sadler, Marcin Sliwa, Thomas Miller, Muhamma…</span>
-<span class="co">#&gt; $ journalTitle   &lt;chr&gt; "High Energy Density Physics"</span>
-<span class="co">#&gt; $ publishedYear  &lt;chr&gt; "2017"</span>
-<span class="co">#&gt; $ publishedPages &lt;chr&gt; "212-216"</span>
-<span class="co">#&gt; $ issn           &lt;chr&gt; "1574-1818"</span>
-<span class="co">#&gt; $ isbn           &lt;chr&gt; NA</span>
-<span class="co">#&gt; $ doi            &lt;chr&gt; "10.1016/j.hedp.2017.05.007"</span>
-<span class="co">#&gt; $ isPublishedAs  &lt;chr&gt; "PEER_REVIEWED_ARTICLE"</span>
-<span class="co">#&gt; $ lastUpdateDate &lt;chr&gt; "2020-09-10 11:06:25"</span>
-
-<span class="fu"><a href="reference/cordis_disconnect.html">cordis_disconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="co"># display first row of projects info</span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"h2020_project"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: ??</span></span>
+<span><span class="co">#&gt; Columns: 20</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                 &lt;dbl&gt; 800506</span></span>
+<span><span class="co">#&gt; $ acronym            &lt;chr&gt; "IntegraSea"</span></span>
+<span><span class="co">#&gt; $ status             &lt;chr&gt; "CLOSED"</span></span>
+<span><span class="co">#&gt; $ title              &lt;chr&gt; "Integrated offshore cultivation of high value seaw…</span></span>
+<span><span class="co">#&gt; $ startDate          &lt;date&gt; 2019-02-01</span></span>
+<span><span class="co">#&gt; $ endDate            &lt;date&gt; 2021-01-31</span></span>
+<span><span class="co">#&gt; $ totalCost          &lt;dbl&gt; 1486356</span></span>
+<span><span class="co">#&gt; $ ecMaxContribution  &lt;dbl&gt; 1486356</span></span>
+<span><span class="co">#&gt; $ legalBasis         &lt;chr&gt; "H2020-EU.1.3."</span></span>
+<span><span class="co">#&gt; $ topics             &lt;chr&gt; "MSCA-IF-2017"</span></span>
+<span><span class="co">#&gt; $ ecSignatureDate    &lt;date&gt; 2018-04-11</span></span>
+<span><span class="co">#&gt; $ frameworkProgramme &lt;chr&gt; "H2020"</span></span>
+<span><span class="co">#&gt; $ masterCall         &lt;chr&gt; "H2020-MSCA-IF-2017"</span></span>
+<span><span class="co">#&gt; $ subCall            &lt;chr&gt; "H2020-MSCA-IF-2017"</span></span>
+<span><span class="co">#&gt; $ fundingScheme      &lt;chr&gt; "MSCA-IF-EF-ST"</span></span>
+<span><span class="co">#&gt; $ nature             &lt;chr&gt; NA</span></span>
+<span><span class="co">#&gt; $ objective          &lt;chr&gt; "IntegraSea is in line with the EU Blue Growth Agen…</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate  &lt;dttm&gt; 2022-08-24 00:17:27</span></span>
+<span><span class="co">#&gt; $ rcn                &lt;dbl&gt; 215814</span></span>
+<span><span class="co">#&gt; $ grantDoi           &lt;chr&gt; "10.3030/800506"</span></span>
+<span></span>
+<span><span class="co"># display first row with publications data</span></span>
+<span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"h2020_projectPublications"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Rows: ??</span></span>
+<span><span class="co">#&gt; Columns: 16</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                &lt;chr&gt; "771635_675336_PUBLI"</span></span>
+<span><span class="co">#&gt; $ title             &lt;chr&gt; "Debating the EU's Raison d'�tre: On the Relation be…</span></span>
+<span><span class="co">#&gt; $ isPublishedAs     &lt;chr&gt; "Peer reviewed articles"</span></span>
+<span><span class="co">#&gt; $ authors           &lt;chr&gt; "Andrea Sangiovanni"</span></span>
+<span><span class="co">#&gt; $ journalTitle      &lt;chr&gt; "JCMS: Journal of Common Market Studies"</span></span>
+<span><span class="co">#&gt; $ journalNumber     &lt;chr&gt; "57/1"</span></span>
+<span><span class="co">#&gt; $ publishedYear     &lt;dbl&gt; 2018</span></span>
+<span><span class="co">#&gt; $ publishedPages    &lt;chr&gt; "13-27"</span></span>
+<span><span class="co">#&gt; $ issn              &lt;chr&gt; "0021-9886"</span></span>
+<span><span class="co">#&gt; $ isbn              &lt;chr&gt; NA</span></span>
+<span><span class="co">#&gt; $ doi               &lt;chr&gt; "10.1111/jcms.12819"</span></span>
+<span><span class="co">#&gt; $ projectID         &lt;dbl&gt; 771635</span></span>
+<span><span class="co">#&gt; $ projectAcronym    &lt;chr&gt; "EUSOL"</span></span>
+<span><span class="co">#&gt; $ collection        &lt;chr&gt; "Project publication"</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate &lt;dttm&gt; 2020-09-10 12:26:01</span></span>
+<span><span class="co">#&gt; $ rcn               &lt;dbl&gt; 621019</span></span>
+<span></span>
+<span><span class="fu"><a href="reference/cordis_disconnect.html">cordis_disconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></code></pre></div>
+</div>
 </div>
 </div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing cordis</a></li>
+</ul>
+</div>
+
 <div class="developers">
-<h2>Developers</h2>
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Markus Skyttner <br><small class="roles"> Maintainer </small>  </li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/KTH-Library/cordis/actions"><img src="https://github.com/KTH-Library/cordis/workflows/R-CMD-check/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 </ul>
 </div>
-</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Markus Skyttner.</p>
+  <p></p>
+<p>Developed by Markus Skyttner.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -313,6 +616,8 @@
 
   
 
+
+  
 
   </body>
 </html>
