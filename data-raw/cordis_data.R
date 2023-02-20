@@ -10,6 +10,8 @@ library(readxl)
 
 cachedir <- rappdirs::user_cache_dir("cordis")
 
+if (!dir.exists(cachedir)) dir.create(cachedir, recursive = TRUE)
+
 dl <- function(url, destfile, ...)
   curl::curl_download(url, destfile, quiet = FALSE)
 
@@ -46,6 +48,9 @@ files_xl <-
   read_xlsx()
 
 # download txt files
+rss_ref |> filter(is_txt) |> pmap_chr(dl)
+
+# read txt files
 files_txt <-
   rss_ref |> filter(grepl("txt", destfile)) |>
   pmap(function(destfile, ...) read_lines(destfile)) |> unlist() |>
@@ -73,6 +78,36 @@ tbls_csv <-
 data_ref <- setNames(files_csv, tbls_csv)
 data_ref$ref_h2020topicKeywords <- files_xl
 data_ref$ref_fp7subprogrammes <- files_txt
+
+predict_col_enc <- function(x, summarize = TRUE) {
+
+  guess <-
+    stringi::stri_enc_detect(x) |> map_dfr(function(y) y |>
+    filter(Confidence == max(Confidence)), .id = "id") |>
+    group_by(id) |> summarize(across(everything(), first)) |>
+    rename(enc = Encoding, lang = Language, score = Confidence)
+
+  col <- left_join(tibble(id = as.character(seq_along(x)), val = x), guess, by = "id")
+
+  if (!summarize) return (col)
+
+  col |>
+    group_by(enc) |>
+    summarize(
+      n = n_distinct(val),
+      sample = paste0(collapse = " | ", head(na.omit(val), 3)),
+      lang = paste(collapse = " | ", head(unique(na.omit(lang)), 3)),
+      score = mean(score)
+    ) |>
+    arrange(desc(n), desc(score)) |>
+    select(enc, n, score, lang, sample) |>
+    filter(!is.na(enc))
+
+}
+
+#names(data_ref) |> map(function(x) map(data_ref[[x]], predict_col_enc))
+
+#predict_col_enc(data_ref$ref_fp7programmes$Title, summarize = T)
 
 #--------
 #
