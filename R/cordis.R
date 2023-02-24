@@ -54,7 +54,7 @@ cordis_meta <- function() {
 #' @export
 #' @import duckdb
 cordis_con <- function() {
-  dbfile <- normalizePath(file.path(cachedir(), "cordisdb"), NA) |> suppressWarnings()
+  dbfile <- normalizePath(file.path(cachedir(), "cordisdb"))
   #message("Connecting to ", dbfile)
   dbConnect(duckdb(dbdir = dbfile))
 }
@@ -146,7 +146,7 @@ cordis_export <- function(destdir, overwrite = FALSE) {
 cordis_import <- function(repo_slug = "kth-library/cordis-data",
                           refresh = FALSE, verbose = TRUE, version = "v0.2.0") {
 
-  dldir <- normalizePath(file.path(cachedir(), "temp"))
+  dldir <- normalizePath(file.path(cachedir(), "temp")) |> suppressWarnings()
 
   if (dir.exists(dldir) && !refresh) {
     message("Directory ", dldir, " already exits, for fresh data download, retry with refresh=TRUE")
