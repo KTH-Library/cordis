@@ -34,7 +34,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">cordis</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.2.1</span>
       </span>
     </div>
 
@@ -114,78 +114,79 @@
 <span><span class="fu"><a href="reference/cordis_tables.html">cordis_tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html" class="external-link">desc</a></span><span class="op">(</span><span class="va">n_row</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">50</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 41 × 2</span></span>
+<span><span class="co">#&gt; # A tibble: 43 × 2</span></span>
 <span><span class="co">#&gt;    table                              n_row</span></span>
 <span><span class="co">#&gt;    &lt;chr&gt;                              &lt;dbl&gt;</span></span>
 <span><span class="co">#&gt;  1 h2020_scoreboard                 1048576</span></span>
-<span><span class="co">#&gt;  2 h2020_projectPublications         318740</span></span>
+<span><span class="co">#&gt;  2 h2020_projectPublications         355710</span></span>
 <span><span class="co">#&gt;  3 fp7_dm_proj_publications          305549</span></span>
-<span><span class="co">#&gt;  4 h2020_organization                177078</span></span>
-<span><span class="co">#&gt;  5 h2020_webLink                     162178</span></span>
-<span><span class="co">#&gt;  6 fp7_organization                  140055</span></span>
-<span><span class="co">#&gt;  7 h2020_projectDeliverables         137319</span></span>
-<span><span class="co">#&gt;  8 h2020_euroSciVoc                  122551</span></span>
-<span><span class="co">#&gt;  9 fp7_euroSciVoc                     68651</span></span>
-<span><span class="co">#&gt; 10 h2020_legalBasis                   65784</span></span>
-<span><span class="co">#&gt; 11 he_organization                    36680</span></span>
-<span><span class="co">#&gt; 12 h2020_project                      35382</span></span>
-<span><span class="co">#&gt; 13 h2020_topics                       35382</span></span>
-<span><span class="co">#&gt; 14 h2020_reportSummaries              27082</span></span>
-<span><span class="co">#&gt; 15 fp7_topics                         26153</span></span>
-<span><span class="co">#&gt; 16 fp7_legalBasis                     25785</span></span>
-<span><span class="co">#&gt; 17 fp7_project                        25785</span></span>
-<span><span class="co">#&gt; 18 fp7_reportSummaries                21606</span></span>
-<span><span class="co">#&gt; 19 he_euroSciVoc                      15810</span></span>
-<span><span class="co">#&gt; 20 fp7_webItem                        11767</span></span>
-<span><span class="co">#&gt; 21 h2020_pi                            8043</span></span>
-<span><span class="co">#&gt; 22 fp7_webLink                         7989</span></span>
-<span><span class="co">#&gt; 23 he_legalBasis                       7657</span></span>
-<span><span class="co">#&gt; 24 ref_fp7programmes                   6233</span></span>
-<span><span class="co">#&gt; 25 ref_fp7subprogrammes                6096</span></span>
-<span><span class="co">#&gt; 26 fp7_projectirps                     5293</span></span>
-<span><span class="co">#&gt; 27 he_project                          5250</span></span>
-<span><span class="co">#&gt; 28 he_topics                           5250</span></span>
-<span><span class="co">#&gt; 29 ref_h2020programmes                 3905</span></span>
-<span><span class="co">#&gt; 30 ref_h2020topics                     3905</span></span>
-<span><span class="co">#&gt; 31 ref_h2020topicKeywords              2562</span></span>
-<span><span class="co">#&gt; 32 h2020_projectIrps                   2324</span></span>
-<span><span class="co">#&gt; 33 ref_horizontopics                   2047</span></span>
-<span><span class="co">#&gt; 34 ref_fp6programmes                   2027</span></span>
-<span><span class="co">#&gt; 35 ref_countries                       1503</span></span>
-<span><span class="co">#&gt; 36 he_webLink                           241</span></span>
-<span><span class="co">#&gt; 37 he_projectDeliverables               205</span></span>
-<span><span class="co">#&gt; 38 ref_projectfundingschemecategory     187</span></span>
-<span><span class="co">#&gt; 39 ref_horizonprogrammes                123</span></span>
-<span><span class="co">#&gt; 40 h2020_webItem                          9</span></span>
-<span><span class="co">#&gt; 41 ref_organizationactivitytype           5</span></span>
+<span><span class="co">#&gt;  4 h2020_webLink                     178131</span></span>
+<span><span class="co">#&gt;  5 h2020_organization                177834</span></span>
+<span><span class="co">#&gt;  6 h2020_projectDeliverables         148106</span></span>
+<span><span class="co">#&gt;  7 fp7_organization                  140008</span></span>
+<span><span class="co">#&gt;  8 h2020_euroSciVoc                  120020</span></span>
+<span><span class="co">#&gt;  9 fp7_euroSciVoc                     68017</span></span>
+<span><span class="co">#&gt; 10 h2020_legalBasis                   65792</span></span>
+<span><span class="co">#&gt; 11 he_organization                    52918</span></span>
+<span><span class="co">#&gt; 12 h2020_project                      35386</span></span>
+<span><span class="co">#&gt; 13 h2020_topics                       35386</span></span>
+<span><span class="co">#&gt; 14 h2020_reportSummaries              29613</span></span>
+<span><span class="co">#&gt; 15 he_euroSciVoc                      26158</span></span>
+<span><span class="co">#&gt; 16 fp7_topics                         26153</span></span>
+<span><span class="co">#&gt; 17 fp7_legalBasis                     25785</span></span>
+<span><span class="co">#&gt; 18 fp7_project                        25785</span></span>
+<span><span class="co">#&gt; 19 fp7_reportSummaries                21606</span></span>
+<span><span class="co">#&gt; 20 fp7_webItem                        11764</span></span>
+<span><span class="co">#&gt; 21 he_legalBasis                      11531</span></span>
+<span><span class="co">#&gt; 22 he_project                          8442</span></span>
+<span><span class="co">#&gt; 23 he_topics                           8442</span></span>
+<span><span class="co">#&gt; 24 fp7_webLink                         8160</span></span>
+<span><span class="co">#&gt; 25 h2020_pi                            8043</span></span>
+<span><span class="co">#&gt; 26 ref_fp7programmes                   6233</span></span>
+<span><span class="co">#&gt; 27 ref_fp7subprogrammes                6096</span></span>
+<span><span class="co">#&gt; 28 fp7_projectirps                     5293</span></span>
+<span><span class="co">#&gt; 29 ref_h2020topics                     3910</span></span>
+<span><span class="co">#&gt; 30 ref_h2020topicKeywords              2562</span></span>
+<span><span class="co">#&gt; 31 h2020_projectIrps                   2324</span></span>
+<span><span class="co">#&gt; 32 ref_horizontopics                   2211</span></span>
+<span><span class="co">#&gt; 33 ref_fp6programmes                   2027</span></span>
+<span><span class="co">#&gt; 34 ref_countries                       1503</span></span>
+<span><span class="co">#&gt; 35 he_webLink                          1376</span></span>
+<span><span class="co">#&gt; 36 he_projectDeliverables              1180</span></span>
+<span><span class="co">#&gt; 37 ref_h2020programmes                  769</span></span>
+<span><span class="co">#&gt; 38 ref_projectfundingschemecategory     298</span></span>
+<span><span class="co">#&gt; 39 he_reportSummaries                   134</span></span>
+<span><span class="co">#&gt; 40 ref_horizonprogrammes                123</span></span>
+<span><span class="co">#&gt; 41 h2020_webItem                          9</span></span>
+<span><span class="co">#&gt; 42 ref_organizationactivitytype           5</span></span>
+<span><span class="co">#&gt; 43 he_webItem                             1</span></span>
 <span></span>
 <span><span class="co"># database schema</span></span>
 <span><span class="fu"><a href="reference/cordis_schema.html">cordis_schema</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span></span>
 <span><span class="co">#&gt; # A tibble: 20 × 7</span></span>
-<span><span class="co">#&gt;    tablename                  cid name               type  notnull dflt_…¹ pk   </span></span>
-<span><span class="co">#&gt;    &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;              &lt;chr&gt; &lt;lgl&gt;   &lt;chr&gt;   &lt;lgl&gt;</span></span>
-<span><span class="co">#&gt;  1 fp7_dm_proj_publications     0 PROJECT_ID         DOUB… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  2 fp7_dm_proj_publications     1 TITLE              VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  3 fp7_dm_proj_publications     2 AUTHOR             VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  4 fp7_dm_proj_publications     3 DOI                VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  5 fp7_dm_proj_publications     4 PUBLICATION_TYPE   VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  6 fp7_dm_proj_publications     5 REPOSITORY_URL     VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  7 fp7_dm_proj_publications     6 JOURNAL_TITLE      VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  8 fp7_dm_proj_publications     7 PUBLISHER          VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt;  9 fp7_dm_proj_publications     8 VOLUME             VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 10 fp7_dm_proj_publications     9 PAGES              VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 11 fp7_dm_proj_publications    10 QA_PROCESSED_DOI   VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 12 fp7_dm_proj_publications    11 RECORD_ID          VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 13 fp7_euroSciVoc               0 projectID          DOUB… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 14 fp7_euroSciVoc               1 euroSciVocCode     VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 15 fp7_euroSciVoc               2 euroSciVocPath     VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 16 fp7_euroSciVoc               3 euroSciVocTitle    VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 17 fp7_euroSciVoc               4 euroSciVocDescrip… BOOL… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 18 fp7_legalBasis               0 projectID          DOUB… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 19 fp7_legalBasis               1 legalBasis         VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; 20 fp7_legalBasis               2 title              VARC… FALSE   &lt;NA&gt;    FALSE</span></span>
-<span><span class="co">#&gt; # … with abbreviated variable name ¹​dflt_value</span></span></code></pre></div>
+<span><span class="co">#&gt;    tablename                  cid name            type  notnull dflt_value pk   </span></span>
+<span><span class="co">#&gt;    &lt;chr&gt;                    &lt;int&gt; &lt;chr&gt;           &lt;chr&gt; &lt;lgl&gt;   &lt;chr&gt;      &lt;lgl&gt;</span></span>
+<span><span class="co">#&gt;  1 fp7_dm_proj_publications     0 PROJECT_ID      DOUB… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  2 fp7_dm_proj_publications     1 TITLE           VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  3 fp7_dm_proj_publications     2 AUTHOR          VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  4 fp7_dm_proj_publications     3 DOI             VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  5 fp7_dm_proj_publications     4 PUBLICATION_TY… VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  6 fp7_dm_proj_publications     5 REPOSITORY_URL  VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  7 fp7_dm_proj_publications     6 JOURNAL_TITLE   VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  8 fp7_dm_proj_publications     7 PUBLISHER       VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt;  9 fp7_dm_proj_publications     8 VOLUME          VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 10 fp7_dm_proj_publications     9 PAGES           VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 11 fp7_dm_proj_publications    10 QA_PROCESSED_D… VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 12 fp7_dm_proj_publications    11 RECORD_ID       VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 13 fp7_euroSciVoc               0 projectID       DOUB… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 14 fp7_euroSciVoc               1 euroSciVocCode  VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 15 fp7_euroSciVoc               2 euroSciVocPath  VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 16 fp7_euroSciVoc               3 euroSciVocTitle VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 17 fp7_euroSciVoc               4 euroSciVocDesc… BOOL… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 18 fp7_legalBasis               0 projectID       DOUB… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 19 fp7_legalBasis               1 legalBasis      VARC… FALSE   &lt;NA&gt;       FALSE</span></span>
+<span><span class="co">#&gt; 20 fp7_legalBasis               2 title           VARC… FALSE   &lt;NA&gt;       FALSE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="data-from-cordis-projects">Data from CORDIS projects<a class="anchor" aria-label="anchor" href="#data-from-cordis-projects"></a>
@@ -201,42 +202,44 @@
 <span><span class="co"># these tables are of primary interest</span></span>
 <span><span class="fu"><a href="reference/cordis_tables.html">cordis_tables</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/grep.html" class="external-link">grepl</a></span><span class="op">(</span><span class="st">"^he_"</span>, <span class="va">table</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 7 × 2</span></span>
+<span><span class="co">#&gt; # A tibble: 9 × 2</span></span>
 <span><span class="co">#&gt;   table                  n_row</span></span>
 <span><span class="co">#&gt;   &lt;chr&gt;                  &lt;dbl&gt;</span></span>
-<span><span class="co">#&gt; 1 he_euroSciVoc          15810</span></span>
-<span><span class="co">#&gt; 2 he_legalBasis           7657</span></span>
-<span><span class="co">#&gt; 3 he_organization        36680</span></span>
-<span><span class="co">#&gt; 4 he_project              5250</span></span>
-<span><span class="co">#&gt; 5 he_projectDeliverables   205</span></span>
-<span><span class="co">#&gt; 6 he_topics               5250</span></span>
-<span><span class="co">#&gt; 7 he_webLink               241</span></span>
+<span><span class="co">#&gt; 1 he_euroSciVoc          26158</span></span>
+<span><span class="co">#&gt; 2 he_legalBasis          11531</span></span>
+<span><span class="co">#&gt; 3 he_organization        52918</span></span>
+<span><span class="co">#&gt; 4 he_project              8442</span></span>
+<span><span class="co">#&gt; 5 he_projectDeliverables  1180</span></span>
+<span><span class="co">#&gt; 6 he_reportSummaries       134</span></span>
+<span><span class="co">#&gt; 7 he_topics               8442</span></span>
+<span><span class="co">#&gt; 8 he_webItem                 1</span></span>
+<span><span class="co">#&gt; 9 he_webLink              1376</span></span>
 <span></span>
 <span><span class="co"># display first row of projects info</span></span>
 <span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"he_project"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: ??</span></span>
 <span><span class="co">#&gt; Columns: 20</span></span>
-<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
-<span><span class="co">#&gt; $ id                 &lt;dbl&gt; 101043356</span></span>
-<span><span class="co">#&gt; $ acronym            &lt;chr&gt; "PROGRESS"</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                 &lt;dbl&gt; 101103474</span></span>
+<span><span class="co">#&gt; $ acronym            &lt;chr&gt; "NEOPLASTICS"</span></span>
 <span><span class="co">#&gt; $ status             &lt;chr&gt; "SIGNED"</span></span>
-<span><span class="co">#&gt; $ title              &lt;chr&gt; "Reading provenance from ubiquitous quartz:  unders…</span></span>
-<span><span class="co">#&gt; $ startDate          &lt;date&gt; 2023-01-01</span></span>
-<span><span class="co">#&gt; $ endDate            &lt;date&gt; 2027-12-31</span></span>
-<span><span class="co">#&gt; $ totalCost          &lt;dbl&gt; 2657500</span></span>
-<span><span class="co">#&gt; $ ecMaxContribution  &lt;dbl&gt; 2657500</span></span>
-<span><span class="co">#&gt; $ legalBasis         &lt;chr&gt; "HORIZON.1.1"</span></span>
-<span><span class="co">#&gt; $ topics             &lt;chr&gt; "ERC-2021-COG"</span></span>
-<span><span class="co">#&gt; $ ecSignatureDate    &lt;date&gt; 2022-09-21</span></span>
+<span><span class="co">#&gt; $ title              &lt;chr&gt; "Natural deep Eutectic sOlvents for sustainable bio…</span></span>
+<span><span class="co">#&gt; $ startDate          &lt;date&gt; 2024-06-01</span></span>
+<span><span class="co">#&gt; $ endDate            &lt;date&gt; 2026-05-31</span></span>
+<span><span class="co">#&gt; $ totalCost          &lt;dbl&gt; 0</span></span>
+<span><span class="co">#&gt; $ ecMaxContribution  &lt;dbl&gt; 181153</span></span>
+<span><span class="co">#&gt; $ legalBasis         &lt;chr&gt; "HORIZON.1.2"</span></span>
+<span><span class="co">#&gt; $ topics             &lt;chr&gt; "HORIZON-MSCA-2022-PF-01-01"</span></span>
+<span><span class="co">#&gt; $ ecSignatureDate    &lt;date&gt; 2023-07-13</span></span>
 <span><span class="co">#&gt; $ frameworkProgramme &lt;chr&gt; "HORIZON"</span></span>
-<span><span class="co">#&gt; $ masterCall         &lt;chr&gt; "ERC-2021-COG"</span></span>
-<span><span class="co">#&gt; $ subCall            &lt;chr&gt; "ERC-2021-COG"</span></span>
-<span><span class="co">#&gt; $ fundingScheme      &lt;chr&gt; "ERC"</span></span>
+<span><span class="co">#&gt; $ masterCall         &lt;chr&gt; "HORIZON-MSCA-2022-PF-01"</span></span>
+<span><span class="co">#&gt; $ subCall            &lt;chr&gt; "HORIZON-MSCA-2022-PF-01"</span></span>
+<span><span class="co">#&gt; $ fundingScheme      &lt;chr&gt; "HORIZON-TMA-MSCA-PF-EF"</span></span>
 <span><span class="co">#&gt; $ nature             &lt;lgl&gt; NA</span></span>
-<span><span class="co">#&gt; $ objective          &lt;chr&gt; "Quantitative provenance analysis studies are instr…</span></span>
-<span><span class="co">#&gt; $ contentUpdateDate  &lt;dttm&gt; 2022-09-28 12:21:14</span></span>
-<span><span class="co">#&gt; $ rcn                &lt;dbl&gt; 242239</span></span>
-<span><span class="co">#&gt; $ grantDoi           &lt;chr&gt; "10.3030/101043356"</span></span>
+<span><span class="co">#&gt; $ objective          &lt;chr&gt; "Petroleum-derived plastics produce greenhouse gas …</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate  &lt;dttm&gt; 2023-07-24 11:31:51</span></span>
+<span><span class="co">#&gt; $ rcn                &lt;dbl&gt; 254572</span></span>
+<span><span class="co">#&gt; $ grantDoi           &lt;chr&gt; "10.3030/101103474"</span></span>
 <span></span>
 <span><span class="co"># display first five rows with PI data, exclude title and objective</span></span>
 <span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"he_project"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -245,23 +248,23 @@
 <table style="width:100%;" class="table">
 <colgroup>
 <col width="3%">
-<col width="4%">
+<col width="3%">
 <col width="2%">
 <col width="3%">
 <col width="3%">
 <col width="3%">
-<col width="6%">
-<col width="4%">
-<col width="11%">
+<col width="5%">
+<col width="3%">
+<col width="12%">
 <col width="5%">
 <col width="6%">
-<col width="10%">
-<col width="10%">
-<col width="4%">
+<col width="11%">
+<col width="11%">
+<col width="7%">
 <col width="2%">
 <col width="6%">
 <col width="2%">
-<col width="6%">
+<col width="5%">
 </colgroup>
 <thead><tr class="header">
 <th align="right">id</th>
@@ -285,104 +288,104 @@
 </tr></thead>
 <tbody>
 <tr class="odd">
-<td align="right">101043356</td>
-<td align="left">PROGRESS</td>
+<td align="right">101103474</td>
+<td align="left">NEOPLASTICS</td>
+<td align="left">SIGNED</td>
+<td align="left">2024-06-01</td>
+<td align="left">2026-05-31</td>
+<td align="right">0</td>
+<td align="right">181153</td>
+<td align="left">HORIZON.1.2</td>
+<td align="left">HORIZON-MSCA-2022-PF-01-01</td>
+<td align="left">2023-07-13</td>
+<td align="left">HORIZON</td>
+<td align="left">HORIZON-MSCA-2022-PF-01</td>
+<td align="left">HORIZON-MSCA-2022-PF-01</td>
+<td align="left">HORIZON-TMA-MSCA-PF-EF</td>
+<td align="left">NA</td>
+<td align="left">2023-07-24 11:31:51</td>
+<td align="right">254572</td>
+<td align="left">10.3030/101103474</td>
+</tr>
+<tr class="even">
+<td align="right">101091623</td>
+<td align="left">BILASURF</td>
 <td align="left">SIGNED</td>
 <td align="left">2023-01-01</td>
-<td align="left">2027-12-31</td>
-<td align="right">2657500</td>
-<td align="right">2657500</td>
-<td align="left">HORIZON.1.1</td>
-<td align="left">ERC-2021-COG</td>
-<td align="left">2022-09-21</td>
+<td align="left">2025-12-31</td>
+<td align="right">5601669</td>
+<td align="right">5601669</td>
+<td align="left">HORIZON.2.4</td>
+<td align="left">HORIZON-CL4-2022-TWIN-TRANSITION-01-02</td>
+<td align="left">2022-11-23</td>
 <td align="left">HORIZON</td>
-<td align="left">ERC-2021-COG</td>
-<td align="left">ERC-2021-COG</td>
-<td align="left">ERC</td>
+<td align="left">HORIZON-CL4-2022-TWIN-TRANSITION-01</td>
+<td align="left">HORIZON-CL4-2022-TWIN-TRANSITION-01</td>
+<td align="left">RIA</td>
 <td align="left">NA</td>
-<td align="left">2022-09-28 12:21:14</td>
-<td align="right">242239</td>
-<td align="left">10.3030/101043356</td>
-</tr>
-<tr class="even">
-<td align="right">101100999</td>
-<td align="left">SCOPE</td>
-<td align="left">SIGNED</td>
-<td align="left">2022-09-01</td>
-<td align="left">2024-02-29</td>
-<td align="right">0</td>
-<td align="right">150000</td>
-<td align="left">HORIZON.1.1</td>
-<td align="left">ERC-2022-POC2</td>
-<td align="left">2022-09-29</td>
-<td align="left">HORIZON</td>
-<td align="left">ERC-2022-POC2</td>
-<td align="left">ERC-2022-POC2</td>
-<td align="left">ERC-POC</td>
-<td align="left">NA</td>
-<td align="left">2022-10-06 17:58:49</td>
-<td align="right">242302</td>
-<td align="left">10.3030/101100999</td>
+<td align="left">2022-11-28 13:29:41</td>
+<td align="right">243310</td>
+<td align="left">10.3030/101091623</td>
 </tr>
 <tr class="odd">
-<td align="right">101057802</td>
-<td align="left">e-IRGSP7</td>
+<td align="right">101091687</td>
+<td align="left">MatCHMaker</td>
 <td align="left">SIGNED</td>
-<td align="left">2022-04-01</td>
-<td align="left">2023-09-30</td>
-<td align="right">302260</td>
-<td align="right">302259</td>
-<td align="left">HORIZON.1.3</td>
-<td align="left">HORIZON-INFRA-2021-DEV-01-05</td>
-<td align="left">2022-03-28</td>
+<td align="left">2022-12-01</td>
+<td align="left">2026-05-31</td>
+<td align="right">4700234</td>
+<td align="right">4700234</td>
+<td align="left">HORIZON.2.4</td>
+<td align="left">HORIZON-CL4-2022-RESILIENCE-01-19</td>
+<td align="left">2022-11-18</td>
 <td align="left">HORIZON</td>
-<td align="left">HORIZON-INFRA-2021-DEV-01</td>
-<td align="left">HORIZON-INFRA-2021-DEV-01</td>
-<td align="left">CSA</td>
+<td align="left">HORIZON-CL4-2022-RESILIENCE-01</td>
+<td align="left">HORIZON-CL4-2022-RESILIENCE-01</td>
+<td align="left">RIA</td>
 <td align="left">NA</td>
-<td align="left">2022-09-04 13:39:32</td>
-<td align="right">241435</td>
-<td align="left">10.3030/101057802</td>
+<td align="left">2022-11-25 10:10:39</td>
+<td align="right">243192</td>
+<td align="left">10.3030/101091687</td>
 </tr>
 <tr class="even">
-<td align="right">190100375</td>
-<td align="left">EOinTime</td>
+<td align="right">101111996</td>
+<td align="left">CUBIC</td>
 <td align="left">SIGNED</td>
-<td align="left">2022-10-01</td>
-<td align="left">2024-03-31</td>
-<td align="right">2489000</td>
-<td align="right">1735300</td>
-<td align="left">HORIZON.3.1</td>
-<td align="left">HORIZON-EIC-2022-ACCELERATOROPEN-01</td>
-<td align="left">2022-09-20</td>
+<td align="left">2023-09-01</td>
+<td align="left">2027-02-28</td>
+<td align="right">4683365</td>
+<td align="right">4683365</td>
+<td align="left">HORIZON.2.6</td>
+<td align="left">HORIZON-JU-CBE-2022-R-03</td>
+<td align="left">2023-05-12</td>
 <td align="left">HORIZON</td>
-<td align="left">HORIZON-EIC-2022-ACCELERATOR-01</td>
-<td align="left">HORIZON-EIC-2022-ACCELERATOR-01</td>
-<td align="left">HORIZON-AG</td>
+<td align="left">HORIZON-JU-CBE-2022</td>
+<td align="left">HORIZON-JU-CBE-2022</td>
+<td align="left">HORIZON-JU-RIA</td>
 <td align="left">NA</td>
-<td align="left">2022-09-27 17:17:17</td>
-<td align="right">242179</td>
-<td align="left">10.3030/190100375</td>
+<td align="left">2023-06-21 09:34:12</td>
+<td align="right">249379</td>
+<td align="left">10.3030/101111996</td>
 </tr>
 <tr class="odd">
-<td align="right">101073222</td>
-<td align="left">BosomShield</td>
+<td align="right">101092153</td>
+<td align="left">H2GLASS</td>
 <td align="left">SIGNED</td>
-<td align="left">2022-09-01</td>
-<td align="left">2026-08-31</td>
-<td align="right">0</td>
-<td align="right">25953552</td>
-<td align="left">HORIZON.1.2</td>
-<td align="left">HORIZON-MSCA-2021-DN-01-01</td>
-<td align="left">2022-07-06</td>
+<td align="left">2023-01-01</td>
+<td align="left">2026-12-31</td>
+<td align="right">31862996</td>
+<td align="right">23267442</td>
+<td align="left">HORIZON.2.4</td>
+<td align="left">HORIZON-CL4-2022-TWIN-TRANSITION-01-17</td>
+<td align="left">2022-11-24</td>
 <td align="left">HORIZON</td>
-<td align="left">HORIZON-MSCA-2021-DN-01</td>
-<td align="left">HORIZON-MSCA-2021-DN-01</td>
-<td align="left">HORIZON-AG-UN</td>
+<td align="left">HORIZON-CL4-2022-TWIN-TRANSITION-01</td>
+<td align="left">HORIZON-CL4-2022-TWIN-TRANSITION-01</td>
+<td align="left">IA</td>
 <td align="left">NA</td>
-<td align="left">2022-09-12 16:42:49</td>
-<td align="right">241045</td>
-<td align="left">10.3030/101073222</td>
+<td align="left">2022-11-28 13:29:18</td>
+<td align="right">243300</td>
+<td align="left">10.3030/101092153</td>
 </tr>
 </tbody>
 </table>
@@ -395,17 +398,17 @@
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: ??</span></span>
 <span><span class="co">#&gt; Columns: 10</span></span>
-<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
-<span><span class="co">#&gt; $ id                &lt;chr&gt; "101069941_27_DELIVHORIZON"</span></span>
-<span><span class="co">#&gt; $ title             &lt;chr&gt; "Project Website, Corporate identity and general tem…</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                &lt;chr&gt; "101091852_26_DELIVHORIZON"</span></span>
+<span><span class="co">#&gt; $ title             &lt;chr&gt; "Communication basics (project logo, website, brochu…</span></span>
 <span><span class="co">#&gt; $ deliverableType   &lt;chr&gt; "Websites, patent fillings, videos etc."</span></span>
-<span><span class="co">#&gt; $ description       &lt;chr&gt; "Provision of the logo and the templates to be used …</span></span>
-<span><span class="co">#&gt; $ projectID         &lt;dbl&gt; 101069941</span></span>
-<span><span class="co">#&gt; $ projectAcronym    &lt;chr&gt; "PLOTO"</span></span>
+<span><span class="co">#&gt; $ description       &lt;chr&gt; "Communication basics project logo website brochure …</span></span>
+<span><span class="co">#&gt; $ projectID         &lt;dbl&gt; 101091852</span></span>
+<span><span class="co">#&gt; $ projectAcronym    &lt;chr&gt; "REBORN"</span></span>
 <span><span class="co">#&gt; $ url               &lt;chr&gt; "https://ec.europa.eu/research/participants/document…</span></span>
 <span><span class="co">#&gt; $ collection        &lt;chr&gt; "Project deliverable"</span></span>
-<span><span class="co">#&gt; $ contentUpdateDate &lt;dttm&gt; 2022-12-26 19:05:16</span></span>
-<span><span class="co">#&gt; $ rcn               &lt;dbl&gt; 902856</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate &lt;dttm&gt; 2023-04-21 15:10:37</span></span>
+<span><span class="co">#&gt; $ rcn               &lt;dbl&gt; 929520</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/cordis_disconnect.html">cordis_disconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></code></pre></div>
 <p>Tables for Horizon 2020, FP7 etc are also available, as well as “reference data”.</p>
@@ -431,13 +434,13 @@
 <span><span class="co">#&gt;  2 ref_fp6programmes                 2027</span></span>
 <span><span class="co">#&gt;  3 ref_fp7programmes                 6233</span></span>
 <span><span class="co">#&gt;  4 ref_fp7subprogrammes              6096</span></span>
-<span><span class="co">#&gt;  5 ref_h2020programmes               3905</span></span>
+<span><span class="co">#&gt;  5 ref_h2020programmes                769</span></span>
 <span><span class="co">#&gt;  6 ref_h2020topicKeywords            2562</span></span>
-<span><span class="co">#&gt;  7 ref_h2020topics                   3905</span></span>
+<span><span class="co">#&gt;  7 ref_h2020topics                   3910</span></span>
 <span><span class="co">#&gt;  8 ref_horizonprogrammes              123</span></span>
-<span><span class="co">#&gt;  9 ref_horizontopics                 2047</span></span>
+<span><span class="co">#&gt;  9 ref_horizontopics                 2211</span></span>
 <span><span class="co">#&gt; 10 ref_organizationactivitytype         5</span></span>
-<span><span class="co">#&gt; 11 ref_projectfundingschemecategory   187</span></span>
+<span><span class="co">#&gt; 11 ref_projectfundingschemecategory   298</span></span>
 <span></span>
 <span><span class="co"># display first five rows with PI data</span></span>
 <span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"h2020_pi"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -514,27 +517,27 @@
 <span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"h2020_project"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: ??</span></span>
 <span><span class="co">#&gt; Columns: 20</span></span>
-<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
-<span><span class="co">#&gt; $ id                 &lt;dbl&gt; 800506</span></span>
-<span><span class="co">#&gt; $ acronym            &lt;chr&gt; "IntegraSea"</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                 &lt;dbl&gt; 879926</span></span>
+<span><span class="co">#&gt; $ acronym            &lt;chr&gt; "EEN SACHSEN"</span></span>
 <span><span class="co">#&gt; $ status             &lt;chr&gt; "CLOSED"</span></span>
-<span><span class="co">#&gt; $ title              &lt;chr&gt; "Integrated offshore cultivation of high value seaw…</span></span>
-<span><span class="co">#&gt; $ startDate          &lt;date&gt; 2019-02-01</span></span>
-<span><span class="co">#&gt; $ endDate            &lt;date&gt; 2021-01-31</span></span>
-<span><span class="co">#&gt; $ totalCost          &lt;dbl&gt; 1486356</span></span>
-<span><span class="co">#&gt; $ ecMaxContribution  &lt;dbl&gt; 1486356</span></span>
-<span><span class="co">#&gt; $ legalBasis         &lt;chr&gt; "H2020-EU.1.3."</span></span>
-<span><span class="co">#&gt; $ topics             &lt;chr&gt; "MSCA-IF-2017"</span></span>
-<span><span class="co">#&gt; $ ecSignatureDate    &lt;date&gt; 2018-04-11</span></span>
+<span><span class="co">#&gt; $ title              &lt;chr&gt; "Specific activities in the context of innovation s…</span></span>
+<span><span class="co">#&gt; $ startDate          &lt;date&gt; 2020-01-01</span></span>
+<span><span class="co">#&gt; $ endDate            &lt;date&gt; 2021-12-31</span></span>
+<span><span class="co">#&gt; $ totalCost          &lt;dbl&gt; 125560</span></span>
+<span><span class="co">#&gt; $ ecMaxContribution  &lt;dbl&gt; 125559</span></span>
+<span><span class="co">#&gt; $ legalBasis         &lt;chr&gt; "H2020-EU.2.3."</span></span>
+<span><span class="co">#&gt; $ topics             &lt;chr&gt; "H2020-EEN-SGA4"</span></span>
+<span><span class="co">#&gt; $ ecSignatureDate    &lt;date&gt; 2019-12-06</span></span>
 <span><span class="co">#&gt; $ frameworkProgramme &lt;chr&gt; "H2020"</span></span>
-<span><span class="co">#&gt; $ masterCall         &lt;chr&gt; "H2020-MSCA-IF-2017"</span></span>
-<span><span class="co">#&gt; $ subCall            &lt;chr&gt; "H2020-MSCA-IF-2017"</span></span>
-<span><span class="co">#&gt; $ fundingScheme      &lt;chr&gt; "MSCA-IF-EF-ST"</span></span>
+<span><span class="co">#&gt; $ masterCall         &lt;chr&gt; "H2020-EEN-SGA4-2020-2021"</span></span>
+<span><span class="co">#&gt; $ subCall            &lt;chr&gt; "H2020-EEN-SGA4-2020-2021"</span></span>
+<span><span class="co">#&gt; $ fundingScheme      &lt;chr&gt; "CSA"</span></span>
 <span><span class="co">#&gt; $ nature             &lt;chr&gt; NA</span></span>
-<span><span class="co">#&gt; $ objective          &lt;chr&gt; "IntegraSea is in line with the EU Blue Growth Agen…</span></span>
-<span><span class="co">#&gt; $ contentUpdateDate  &lt;dttm&gt; 2022-08-24 00:17:27</span></span>
-<span><span class="co">#&gt; $ rcn                &lt;dbl&gt; 215814</span></span>
-<span><span class="co">#&gt; $ grantDoi           &lt;chr&gt; "10.3030/800506"</span></span>
+<span><span class="co">#&gt; $ objective          &lt;chr&gt; "The aim of the present proposal is to contribute t…</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate  &lt;dttm&gt; 2022-10-28 14:07:26</span></span>
+<span><span class="co">#&gt; $ rcn                &lt;dbl&gt; 226577</span></span>
+<span><span class="co">#&gt; $ grantDoi           &lt;chr&gt; "10.3030/879926"</span></span>
 <span></span>
 <span><span class="co"># display first row with publications data</span></span>
 <span><span class="va">con</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/tbl.html" class="external-link">tbl</a></span><span class="op">(</span><span class="st">"h2020_projectPublications"</span><span class="op">)</span> <span class="op">|&gt;</span> </span>
@@ -542,23 +545,23 @@
 <span>  <span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html" class="external-link">glimpse</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Rows: ??</span></span>
 <span><span class="co">#&gt; Columns: 16</span></span>
-<span><span class="co">#&gt; Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]</span></span>
-<span><span class="co">#&gt; $ id                &lt;chr&gt; "771635_675336_PUBLI"</span></span>
-<span><span class="co">#&gt; $ title             &lt;chr&gt; "Debating the EU's Raison d'�tre: On the Relation be…</span></span>
+<span><span class="co">#&gt; Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]</span></span>
+<span><span class="co">#&gt; $ id                &lt;chr&gt; "754510_1752052_PUBLI"</span></span>
+<span><span class="co">#&gt; $ title             &lt;chr&gt; "Effect of Mechanochemical Recrystallization on the …</span></span>
 <span><span class="co">#&gt; $ isPublishedAs     &lt;chr&gt; "Peer reviewed articles"</span></span>
-<span><span class="co">#&gt; $ authors           &lt;chr&gt; "Andrea Sangiovanni"</span></span>
-<span><span class="co">#&gt; $ journalTitle      &lt;chr&gt; "JCMS: Journal of Common Market Studies"</span></span>
-<span><span class="co">#&gt; $ journalNumber     &lt;chr&gt; "57/1"</span></span>
-<span><span class="co">#&gt; $ publishedYear     &lt;dbl&gt; 2018</span></span>
-<span><span class="co">#&gt; $ publishedPages    &lt;chr&gt; "13-27"</span></span>
-<span><span class="co">#&gt; $ issn              &lt;chr&gt; "0021-9886"</span></span>
+<span><span class="co">#&gt; $ authors           &lt;chr&gt; "Nieto-Castro D; Garcés-Pineda FA; Moneo-Corcuera A;…</span></span>
+<span><span class="co">#&gt; $ journalTitle      &lt;chr&gt; "Inorganic Chemistry."</span></span>
+<span><span class="co">#&gt; $ journalNumber     &lt;chr&gt; "59 (12):"</span></span>
+<span><span class="co">#&gt; $ publishedYear     &lt;dbl&gt; 2020</span></span>
+<span><span class="co">#&gt; $ publishedPages    &lt;chr&gt; "7953-7959"</span></span>
+<span><span class="co">#&gt; $ issn              &lt;chr&gt; "0020-1669"</span></span>
 <span><span class="co">#&gt; $ isbn              &lt;chr&gt; NA</span></span>
-<span><span class="co">#&gt; $ doi               &lt;chr&gt; "10.1111/jcms.12819"</span></span>
-<span><span class="co">#&gt; $ projectID         &lt;dbl&gt; 771635</span></span>
-<span><span class="co">#&gt; $ projectAcronym    &lt;chr&gt; "EUSOL"</span></span>
+<span><span class="co">#&gt; $ doi               &lt;chr&gt; "10.1021/acs.inorgchem.9b03284"</span></span>
+<span><span class="co">#&gt; $ projectID         &lt;dbl&gt; 754510</span></span>
+<span><span class="co">#&gt; $ projectAcronym    &lt;chr&gt; "PROBIST"</span></span>
 <span><span class="co">#&gt; $ collection        &lt;chr&gt; "Project publication"</span></span>
-<span><span class="co">#&gt; $ contentUpdateDate &lt;dttm&gt; 2020-09-10 12:26:01</span></span>
-<span><span class="co">#&gt; $ rcn               &lt;dbl&gt; 621019</span></span>
+<span><span class="co">#&gt; $ contentUpdateDate &lt;dttm&gt; 2023-07-27 22:51:51</span></span>
+<span><span class="co">#&gt; $ rcn               &lt;dbl&gt; 961574</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/cordis_disconnect.html">cordis_disconnect</a></span><span class="op">(</span><span class="va">con</span><span class="op">)</span></span></code></pre></div>
 </div>
