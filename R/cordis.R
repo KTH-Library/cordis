@@ -144,7 +144,7 @@ cordis_export <- function(destdir, overwrite = FALSE) {
 #' @importFrom purrr map
 #' @importFrom DBI dbExecute
 cordis_import <- function(repo_slug = "kth-library/cordis-data",
-                          refresh = FALSE, verbose = TRUE, version = "v0.2.0") {
+                          refresh = FALSE, verbose = TRUE, version = "v0.2.1") {
 
   dldir <- normalizePath(file.path(cachedir(), "temp"))
 

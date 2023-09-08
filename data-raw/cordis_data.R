@@ -1,4 +1,3 @@
-library(dplyr)
 library(purrr)
 library(duckdb)
 library(httr)
@@ -35,19 +34,22 @@ rss_ref <-
   mutate(tbl = gsub(x = filename, "\\..{3}|-csv|-xlsx|cordisref-", "")) |>
   select(tbl, starts_with("is"), filename, url) |>
   mutate(destfile = file.path(cachedir, filename)) |>
-  arrange(desc(tbl))
+  arrange(desc(tbl)) |>
+  distinct()
 
 # rss_ref$tbl |> unique() |> paste(collapse = "\n") |> cat()
 
 # download xlsx files (NB: xls is misleading)
 files_xl <-
   rss_ref |> filter(is_xls, tbl == "h2020topicKeywords") |>
+  distinct() |>
   pmap(dl) |> unlist() |>
   read_xlsx()
 
 # download txt files
 files_txt <-
   rss_ref |> filter(grepl("txt", destfile)) |>
+  pmap(dl) |>
   pmap(function(destfile, ...) read_lines(destfile)) |> unlist() |>
   strsplit(split = ";") |> enframe(name = "id", value = "cat") |>
   unnest_wider(cat, names_sep = "_")
@@ -61,7 +63,9 @@ rss_ref |> filter(is_csv) |> pmap_chr(dl)
 # read CSV files
 files_csv <-
   rss_ref |> filter(is_csv) |>
-  pmap(function(destfile, ...) readr::read_csv2(destfile, guess_max = 5e4, show_col_types = F))
+  pmap(function(destfile, ...)
+    readr::read_csv2(destfile, guess_max = 5e4, show_col_types = F)
+  )
 
 
 # collect all data (CSV, excel, txt)
@@ -101,14 +105,19 @@ rss_he <-
   mutate(tbl = gsub(x = filename, "\\..{3}|-csv|cordis-HORIZON", "")) |>
   mutate(tbl = paste0("he_", tbl)) |>
   select(tbl, filename, url) |>
-  mutate(destfile = file.path(cachedir, filename))
+  mutate(destfile = file.path(cachedir, filename)) |>
+  distinct()
 
 # download these datasets locally and read the data
 rss_he |> pmap_chr(dl)
 
 read_zip <- function(destfile, target, ...) {
   f <- unz(destfile, target)
-  readr::read_delim(file = f, delim = ";", show_col_types = FALSE, guess_max = 2e4)
+  readr::read_delim(file = f,
+    show_col_types = FALSE, guess_max = 2e4,
+    delim = ";",
+    locale = readr::locale(decimal_mark = ",")
+  )
 }
 
 # list all csv files inside zip-file
@@ -145,10 +154,13 @@ rss_h2020 <-
   # mutate(filename = gsub(x = filename, ".*?data/(.*?\\..{3}).*$", "\\1")) |>
   mutate(tbl = paste0("h2020_", gsub(x = filename, "\\..{3}|-csv|cordis-|_*h2020", ""))) |>
   select(tbl, starts_with("is"), filename, url) |>
-  mutate(destfile = file.path(cachedir, filename))
+  mutate(destfile = file.path(cachedir, filename)) |>
+  distinct()
 
 # download these datasets locally and read the data
 rss_h2020 |> pmap_chr(dl)
+
+#rss_h2020[5,]$url
 
 csvz_h2020 <-
   rss_h2020 |>
@@ -208,7 +220,8 @@ rss_fp7 <-
   mutate(tbl = paste0("fp7_", tolower(gsub(x = filename, "\\..{3}|-csv|cordis-|FP7PC_|_fp7|fp7", "")))) |>
   select(tbl, is_zip, is_csv, filename, url) |>
   mutate(destfile = file.path(cachedir, filename)) |>
-  arrange(desc(tbl))
+  arrange(desc(tbl)) |>
+  distinct()
 
 # download the FP7 files
 rss_fp7 |> pmap_chr(dl)
@@ -240,7 +253,11 @@ csv_fp7 <-
   rss_fp7 |>
   filter(!is_zip) |>
   mutate(sep = ifelse(tbl == "fp7_projectirps", ",", ";")) |>
-  pmap(function(destfile, sep, ...) readr::read_delim(destfile, delim = sep, guess_max = 5e4, show_col_types = F)) |>
+  pmap(function(srcfile, sep, ...) {
+    res <- readr::read_delim(srcfile, delim = sep, guess_max = 5e4, show_col_types = F, )
+    print(problems(res))
+    res
+  }) |>
   setNames(nm = rss_fp7 |> filter(!is_zip) |> getElement("tbl"))
 
 # data_fp7 |> map(readr::problems)
@@ -256,6 +273,30 @@ data_fp7 <- c(csv_fp7, z_fp7)
 
 # combine previous batches of data
 d <- c(data_ref, data_he, data_h2020, data_fp7)
+
+
+# merge partioned tables
+
+e <- d
+#d <- e
+
+tibble(tbl = names(d), is_split = grepl("_\\d+$", names(d))) |>
+  mutate(seq = strsplit(names(d), "_") |> sapply(\(x) x[3])) |>
+  filter(grepl("\\d+", seq)) |>
+  mutate(parent = pmap(list(seq, tbl), \(x, y) gsub(paste0("_", x), "", y)) |> unlist()) |>
+  group_by(parent) |>
+  summarize(tbls = paste0(collapse = ", ", tbl)) |>
+  group_by(parent) |>
+  summarize(union = paste0(collapse = ", ", c(parent, tbls))) |>
+  pull(union) |>
+  sprintf(fmt = "with(d, bind_rows(%s))\n") |> cat()
+
+d$h2020_projectDeliverables <- with(d, bind_rows(h2020_projectDeliverables, h2020_projectDeliverables_2, h2020_projectDeliverables_3, h2020_projectDeliverables_4))
+d$h2020_projectPublications <- with(d, bind_rows(h2020_projectPublications, h2020_projectPublications_2, h2020_projectPublications_3, h2020_projectPublications_4, h2020_projectPublications_5, h2020_projectPublications_6, h2020_projectPublications_7))
+d$h2020_webLink <- with(d, bind_rows(h2020_webLink, h2020_webLink_2, h2020_webLink_3))
+
+d <- d[!grepl("_\\d+$", names(d))]
+d <- purrr::compact(d)
 
 # reencode all strings for "invalid bytecode sequences"
 res <-
@@ -333,17 +374,15 @@ uploadz <- dir(dumpdir, pattern = ".parquet")
 "KTH-Library/cordis-data" |> pb_releases()
 
 # NB: ONLY IF NEEDED, create new tag for new data
-"KTH-Library/cordis-data" |> pb_new_release(tag = "v0.2.0")
+"KTH-Library/cordis-data" |> pb_new_release(tag = "v0.2.1")
 
 # TODO: fix this, see , do it manually for now...
 #piggyback::pb_new_release(repo = "KTH-Library/cordis-data", tag = "v0.1.1")
 
 
-
 # upload to github releases
-pbu <- function(x)
-  pb_upload(file = x, tag = "v0.2.0", repo = "KTH-Library/cordis-data", dir = dumpdir)
+Sys.setenv(GITHUB_PAT=Sys.getenv("GITHUB_TOKEN"))
+pb_upload(uploadz, tag = "v0.2.1", repo = "KTH-Library/cordis-data", dir = dumpdir)
+pb_list(repo = "KTH-Library/cordis-data", tag = "v0.2.1")
 
-uploadz %>% map(pbu)
 
-pb_list(repo = "KTH-Library/cordis-data", tag = "v0.2.0")
