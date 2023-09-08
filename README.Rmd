@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/KTH-Library/cordis/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
+<!-- badges: end --> 
 
 The goal of `cordis` is to simplify data access to data from [CORDIS](https://cordis.europa.eu/), which is an acronym for the Community Research and Development Information Service. It is the European Commission's primary source of results from the projects funded by the EU's framework programmes for research and innovation. This includes programmes from FP1 to Horizon 2020. 
 

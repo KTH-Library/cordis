@@ -94,78 +94,79 @@ library(knitr)
 cordis_tables() |>
   arrange(desc(n_row)) |>
   print(n = 50)
-#> # A tibble: 41 × 2
+#> # A tibble: 43 × 2
 #>    table                              n_row
 #>    <chr>                              <dbl>
 #>  1 h2020_scoreboard                 1048576
-#>  2 h2020_projectPublications         318740
+#>  2 h2020_projectPublications         355710
 #>  3 fp7_dm_proj_publications          305549
-#>  4 h2020_organization                177078
-#>  5 h2020_webLink                     162178
-#>  6 fp7_organization                  140055
-#>  7 h2020_projectDeliverables         137319
-#>  8 h2020_euroSciVoc                  122551
-#>  9 fp7_euroSciVoc                     68651
-#> 10 h2020_legalBasis                   65784
-#> 11 he_organization                    36680
-#> 12 h2020_project                      35382
-#> 13 h2020_topics                       35382
-#> 14 h2020_reportSummaries              27082
-#> 15 fp7_topics                         26153
-#> 16 fp7_legalBasis                     25785
-#> 17 fp7_project                        25785
-#> 18 fp7_reportSummaries                21606
-#> 19 he_euroSciVoc                      15810
-#> 20 fp7_webItem                        11767
-#> 21 h2020_pi                            8043
-#> 22 fp7_webLink                         7989
-#> 23 he_legalBasis                       7657
-#> 24 ref_fp7programmes                   6233
-#> 25 ref_fp7subprogrammes                6096
-#> 26 fp7_projectirps                     5293
-#> 27 he_project                          5250
-#> 28 he_topics                           5250
-#> 29 ref_h2020programmes                 3905
-#> 30 ref_h2020topics                     3905
-#> 31 ref_h2020topicKeywords              2562
-#> 32 h2020_projectIrps                   2324
-#> 33 ref_horizontopics                   2047
-#> 34 ref_fp6programmes                   2027
-#> 35 ref_countries                       1503
-#> 36 he_webLink                           241
-#> 37 he_projectDeliverables               205
-#> 38 ref_projectfundingschemecategory     187
-#> 39 ref_horizonprogrammes                123
-#> 40 h2020_webItem                          9
-#> 41 ref_organizationactivitytype           5
+#>  4 h2020_webLink                     178131
+#>  5 h2020_organization                177834
+#>  6 h2020_projectDeliverables         148106
+#>  7 fp7_organization                  140008
+#>  8 h2020_euroSciVoc                  120020
+#>  9 fp7_euroSciVoc                     68017
+#> 10 h2020_legalBasis                   65792
+#> 11 he_organization                    52918
+#> 12 h2020_project                      35386
+#> 13 h2020_topics                       35386
+#> 14 h2020_reportSummaries              29613
+#> 15 he_euroSciVoc                      26158
+#> 16 fp7_topics                         26153
+#> 17 fp7_legalBasis                     25785
+#> 18 fp7_project                        25785
+#> 19 fp7_reportSummaries                21606
+#> 20 fp7_webItem                        11764
+#> 21 he_legalBasis                      11531
+#> 22 he_project                          8442
+#> 23 he_topics                           8442
+#> 24 fp7_webLink                         8160
+#> 25 h2020_pi                            8043
+#> 26 ref_fp7programmes                   6233
+#> 27 ref_fp7subprogrammes                6096
+#> 28 fp7_projectirps                     5293
+#> 29 ref_h2020topics                     3910
+#> 30 ref_h2020topicKeywords              2562
+#> 31 h2020_projectIrps                   2324
+#> 32 ref_horizontopics                   2211
+#> 33 ref_fp6programmes                   2027
+#> 34 ref_countries                       1503
+#> 35 he_webLink                          1376
+#> 36 he_projectDeliverables              1180
+#> 37 ref_h2020programmes                  769
+#> 38 ref_projectfundingschemecategory     298
+#> 39 he_reportSummaries                   134
+#> 40 ref_horizonprogrammes                123
+#> 41 h2020_webItem                          9
+#> 42 ref_organizationactivitytype           5
+#> 43 he_webItem                             1
 
 # database schema
 cordis_schema() %>%
   head(20)
 #> # A tibble: 20 × 7
-#>    tablename                  cid name               type  notnull dflt_…¹ pk   
-#>    <chr>                    <int> <chr>              <chr> <lgl>   <chr>   <lgl>
-#>  1 fp7_dm_proj_publications     0 PROJECT_ID         DOUB… FALSE   <NA>    FALSE
-#>  2 fp7_dm_proj_publications     1 TITLE              VARC… FALSE   <NA>    FALSE
-#>  3 fp7_dm_proj_publications     2 AUTHOR             VARC… FALSE   <NA>    FALSE
-#>  4 fp7_dm_proj_publications     3 DOI                VARC… FALSE   <NA>    FALSE
-#>  5 fp7_dm_proj_publications     4 PUBLICATION_TYPE   VARC… FALSE   <NA>    FALSE
-#>  6 fp7_dm_proj_publications     5 REPOSITORY_URL     VARC… FALSE   <NA>    FALSE
-#>  7 fp7_dm_proj_publications     6 JOURNAL_TITLE      VARC… FALSE   <NA>    FALSE
-#>  8 fp7_dm_proj_publications     7 PUBLISHER          VARC… FALSE   <NA>    FALSE
-#>  9 fp7_dm_proj_publications     8 VOLUME             VARC… FALSE   <NA>    FALSE
-#> 10 fp7_dm_proj_publications     9 PAGES              VARC… FALSE   <NA>    FALSE
-#> 11 fp7_dm_proj_publications    10 QA_PROCESSED_DOI   VARC… FALSE   <NA>    FALSE
-#> 12 fp7_dm_proj_publications    11 RECORD_ID          VARC… FALSE   <NA>    FALSE
-#> 13 fp7_euroSciVoc               0 projectID          DOUB… FALSE   <NA>    FALSE
-#> 14 fp7_euroSciVoc               1 euroSciVocCode     VARC… FALSE   <NA>    FALSE
-#> 15 fp7_euroSciVoc               2 euroSciVocPath     VARC… FALSE   <NA>    FALSE
-#> 16 fp7_euroSciVoc               3 euroSciVocTitle    VARC… FALSE   <NA>    FALSE
-#> 17 fp7_euroSciVoc               4 euroSciVocDescrip… BOOL… FALSE   <NA>    FALSE
-#> 18 fp7_legalBasis               0 projectID          DOUB… FALSE   <NA>    FALSE
-#> 19 fp7_legalBasis               1 legalBasis         VARC… FALSE   <NA>    FALSE
-#> 20 fp7_legalBasis               2 title              VARC… FALSE   <NA>    FALSE
-#> # … with abbreviated variable name ¹​dflt_value
+#>    tablename                  cid name            type  notnull dflt_value pk   
+#>    <chr>                    <int> <chr>           <chr> <lgl>   <chr>      <lgl>
+#>  1 fp7_dm_proj_publications     0 PROJECT_ID      DOUB… FALSE   <NA>       FALSE
+#>  2 fp7_dm_proj_publications     1 TITLE           VARC… FALSE   <NA>       FALSE
+#>  3 fp7_dm_proj_publications     2 AUTHOR          VARC… FALSE   <NA>       FALSE
+#>  4 fp7_dm_proj_publications     3 DOI             VARC… FALSE   <NA>       FALSE
+#>  5 fp7_dm_proj_publications     4 PUBLICATION_TY… VARC… FALSE   <NA>       FALSE
+#>  6 fp7_dm_proj_publications     5 REPOSITORY_URL  VARC… FALSE   <NA>       FALSE
+#>  7 fp7_dm_proj_publications     6 JOURNAL_TITLE   VARC… FALSE   <NA>       FALSE
+#>  8 fp7_dm_proj_publications     7 PUBLISHER       VARC… FALSE   <NA>       FALSE
+#>  9 fp7_dm_proj_publications     8 VOLUME          VARC… FALSE   <NA>       FALSE
+#> 10 fp7_dm_proj_publications     9 PAGES           VARC… FALSE   <NA>       FALSE
+#> 11 fp7_dm_proj_publications    10 QA_PROCESSED_D… VARC… FALSE   <NA>       FALSE
+#> 12 fp7_dm_proj_publications    11 RECORD_ID       VARC… FALSE   <NA>       FALSE
+#> 13 fp7_euroSciVoc               0 projectID       DOUB… FALSE   <NA>       FALSE
+#> 14 fp7_euroSciVoc               1 euroSciVocCode  VARC… FALSE   <NA>       FALSE
+#> 15 fp7_euroSciVoc               2 euroSciVocPath  VARC… FALSE   <NA>       FALSE
+#> 16 fp7_euroSciVoc               3 euroSciVocTitle VARC… FALSE   <NA>       FALSE
+#> 17 fp7_euroSciVoc               4 euroSciVocDesc… BOOL… FALSE   <NA>       FALSE
+#> 18 fp7_legalBasis               0 projectID       DOUB… FALSE   <NA>       FALSE
+#> 19 fp7_legalBasis               1 legalBasis      VARC… FALSE   <NA>       FALSE
+#> 20 fp7_legalBasis               2 title           VARC… FALSE   <NA>       FALSE
 ```
 
 ### Data from CORDIS projects
@@ -182,42 +183,44 @@ con <- cordis_con()
 # these tables are of primary interest
 cordis_tables() |>
   filter(grepl("^he_", table))
-#> # A tibble: 7 × 2
+#> # A tibble: 9 × 2
 #>   table                  n_row
 #>   <chr>                  <dbl>
-#> 1 he_euroSciVoc          15810
-#> 2 he_legalBasis           7657
-#> 3 he_organization        36680
-#> 4 he_project              5250
-#> 5 he_projectDeliverables   205
-#> 6 he_topics               5250
-#> 7 he_webLink               241
+#> 1 he_euroSciVoc          26158
+#> 2 he_legalBasis          11531
+#> 3 he_organization        52918
+#> 4 he_project              8442
+#> 5 he_projectDeliverables  1180
+#> 6 he_reportSummaries       134
+#> 7 he_topics               8442
+#> 8 he_webItem                 1
+#> 9 he_webLink              1376
 
 # display first row of projects info
 con |> tbl("he_project") |> head(1) |> glimpse()
 #> Rows: ??
 #> Columns: 20
-#> Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]
-#> $ id                 <dbl> 101043356
-#> $ acronym            <chr> "PROGRESS"
+#> Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]
+#> $ id                 <dbl> 101103474
+#> $ acronym            <chr> "NEOPLASTICS"
 #> $ status             <chr> "SIGNED"
-#> $ title              <chr> "Reading provenance from ubiquitous quartz:  unders…
-#> $ startDate          <date> 2023-01-01
-#> $ endDate            <date> 2027-12-31
-#> $ totalCost          <dbl> 2657500
-#> $ ecMaxContribution  <dbl> 2657500
-#> $ legalBasis         <chr> "HORIZON.1.1"
-#> $ topics             <chr> "ERC-2021-COG"
-#> $ ecSignatureDate    <date> 2022-09-21
+#> $ title              <chr> "Natural deep Eutectic sOlvents for sustainable bio…
+#> $ startDate          <date> 2024-06-01
+#> $ endDate            <date> 2026-05-31
+#> $ totalCost          <dbl> 0
+#> $ ecMaxContribution  <dbl> 181153
+#> $ legalBasis         <chr> "HORIZON.1.2"
+#> $ topics             <chr> "HORIZON-MSCA-2022-PF-01-01"
+#> $ ecSignatureDate    <date> 2023-07-13
 #> $ frameworkProgramme <chr> "HORIZON"
-#> $ masterCall         <chr> "ERC-2021-COG"
-#> $ subCall            <chr> "ERC-2021-COG"
-#> $ fundingScheme      <chr> "ERC"
+#> $ masterCall         <chr> "HORIZON-MSCA-2022-PF-01"
+#> $ subCall            <chr> "HORIZON-MSCA-2022-PF-01"
+#> $ fundingScheme      <chr> "HORIZON-TMA-MSCA-PF-EF"
 #> $ nature             <lgl> NA
-#> $ objective          <chr> "Quantitative provenance analysis studies are instr…
-#> $ contentUpdateDate  <dttm> 2022-09-28 12:21:14
-#> $ rcn                <dbl> 242239
-#> $ grantDoi           <chr> "10.3030/101043356"
+#> $ objective          <chr> "Petroleum-derived plastics produce greenhouse gas …
+#> $ contentUpdateDate  <dttm> 2023-07-24 11:31:51
+#> $ rcn                <dbl> 254572
+#> $ grantDoi           <chr> "10.3030/101103474"
 
 # display first five rows with PI data, exclude title and objective
 con |> tbl("he_project") |> 
@@ -225,13 +228,13 @@ con |> tbl("he_project") |>
   head(5) |> knitr::kable()
 ```
 
-|        id | acronym     | status | startDate  | endDate    | totalCost | ecMaxContribution | legalBasis  | topics                              | ecSignatureDate | frameworkProgramme | masterCall                      | subCall                         | fundingScheme | nature | contentUpdateDate   |    rcn | grantDoi          |
-|----------:|:------------|:-------|:-----------|:-----------|----------:|------------------:|:------------|:------------------------------------|:----------------|:-------------------|:--------------------------------|:--------------------------------|:--------------|:-------|:--------------------|-------:|:------------------|
-| 101043356 | PROGRESS    | SIGNED | 2023-01-01 | 2027-12-31 |   2657500 |           2657500 | HORIZON.1.1 | ERC-2021-COG                        | 2022-09-21      | HORIZON            | ERC-2021-COG                    | ERC-2021-COG                    | ERC           | NA     | 2022-09-28 12:21:14 | 242239 | 10.3030/101043356 |
-| 101100999 | SCOPE       | SIGNED | 2022-09-01 | 2024-02-29 |         0 |            150000 | HORIZON.1.1 | ERC-2022-POC2                       | 2022-09-29      | HORIZON            | ERC-2022-POC2                   | ERC-2022-POC2                   | ERC-POC       | NA     | 2022-10-06 17:58:49 | 242302 | 10.3030/101100999 |
-| 101057802 | e-IRGSP7    | SIGNED | 2022-04-01 | 2023-09-30 |    302260 |            302259 | HORIZON.1.3 | HORIZON-INFRA-2021-DEV-01-05        | 2022-03-28      | HORIZON            | HORIZON-INFRA-2021-DEV-01       | HORIZON-INFRA-2021-DEV-01       | CSA           | NA     | 2022-09-04 13:39:32 | 241435 | 10.3030/101057802 |
-| 190100375 | EOinTime    | SIGNED | 2022-10-01 | 2024-03-31 |   2489000 |           1735300 | HORIZON.3.1 | HORIZON-EIC-2022-ACCELERATOROPEN-01 | 2022-09-20      | HORIZON            | HORIZON-EIC-2022-ACCELERATOR-01 | HORIZON-EIC-2022-ACCELERATOR-01 | HORIZON-AG    | NA     | 2022-09-27 17:17:17 | 242179 | 10.3030/190100375 |
-| 101073222 | BosomShield | SIGNED | 2022-09-01 | 2026-08-31 |         0 |          25953552 | HORIZON.1.2 | HORIZON-MSCA-2021-DN-01-01          | 2022-07-06      | HORIZON            | HORIZON-MSCA-2021-DN-01         | HORIZON-MSCA-2021-DN-01         | HORIZON-AG-UN | NA     | 2022-09-12 16:42:49 | 241045 | 10.3030/101073222 |
+|        id | acronym     | status | startDate  | endDate    | totalCost | ecMaxContribution | legalBasis  | topics                                 | ecSignatureDate | frameworkProgramme | masterCall                          | subCall                             | fundingScheme          | nature | contentUpdateDate   |    rcn | grantDoi          |
+|----------:|:------------|:-------|:-----------|:-----------|----------:|------------------:|:------------|:---------------------------------------|:----------------|:-------------------|:------------------------------------|:------------------------------------|:-----------------------|:-------|:--------------------|-------:|:------------------|
+| 101103474 | NEOPLASTICS | SIGNED | 2024-06-01 | 2026-05-31 |         0 |            181153 | HORIZON.1.2 | HORIZON-MSCA-2022-PF-01-01             | 2023-07-13      | HORIZON            | HORIZON-MSCA-2022-PF-01             | HORIZON-MSCA-2022-PF-01             | HORIZON-TMA-MSCA-PF-EF | NA     | 2023-07-24 11:31:51 | 254572 | 10.3030/101103474 |
+| 101091623 | BILASURF    | SIGNED | 2023-01-01 | 2025-12-31 |   5601669 |           5601669 | HORIZON.2.4 | HORIZON-CL4-2022-TWIN-TRANSITION-01-02 | 2022-11-23      | HORIZON            | HORIZON-CL4-2022-TWIN-TRANSITION-01 | HORIZON-CL4-2022-TWIN-TRANSITION-01 | RIA                    | NA     | 2022-11-28 13:29:41 | 243310 | 10.3030/101091623 |
+| 101091687 | MatCHMaker  | SIGNED | 2022-12-01 | 2026-05-31 |   4700234 |           4700234 | HORIZON.2.4 | HORIZON-CL4-2022-RESILIENCE-01-19      | 2022-11-18      | HORIZON            | HORIZON-CL4-2022-RESILIENCE-01      | HORIZON-CL4-2022-RESILIENCE-01      | RIA                    | NA     | 2022-11-25 10:10:39 | 243192 | 10.3030/101091687 |
+| 101111996 | CUBIC       | SIGNED | 2023-09-01 | 2027-02-28 |   4683365 |           4683365 | HORIZON.2.6 | HORIZON-JU-CBE-2022-R-03               | 2023-05-12      | HORIZON            | HORIZON-JU-CBE-2022                 | HORIZON-JU-CBE-2022                 | HORIZON-JU-RIA         | NA     | 2023-06-21 09:34:12 | 249379 | 10.3030/101111996 |
+| 101092153 | H2GLASS     | SIGNED | 2023-01-01 | 2026-12-31 |  31862996 |          23267442 | HORIZON.2.4 | HORIZON-CL4-2022-TWIN-TRANSITION-01-17 | 2022-11-24      | HORIZON            | HORIZON-CL4-2022-TWIN-TRANSITION-01 | HORIZON-CL4-2022-TWIN-TRANSITION-01 | IA                     | NA     | 2022-11-28 13:29:18 | 243300 | 10.3030/101092153 |
 
 ``` r
 
@@ -242,17 +245,17 @@ con |> tbl("he_projectDeliverables") |>
   glimpse()
 #> Rows: ??
 #> Columns: 10
-#> Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]
-#> $ id                <chr> "101069941_27_DELIVHORIZON"
-#> $ title             <chr> "Project Website, Corporate identity and general tem…
+#> Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]
+#> $ id                <chr> "101091852_26_DELIVHORIZON"
+#> $ title             <chr> "Communication basics (project logo, website, brochu…
 #> $ deliverableType   <chr> "Websites, patent fillings, videos etc."
-#> $ description       <chr> "Provision of the logo and the templates to be used …
-#> $ projectID         <dbl> 101069941
-#> $ projectAcronym    <chr> "PLOTO"
+#> $ description       <chr> "Communication basics project logo website brochure …
+#> $ projectID         <dbl> 101091852
+#> $ projectAcronym    <chr> "REBORN"
 #> $ url               <chr> "https://ec.europa.eu/research/participants/document…
 #> $ collection        <chr> "Project deliverable"
-#> $ contentUpdateDate <dttm> 2022-12-26 19:05:16
-#> $ rcn               <dbl> 902856
+#> $ contentUpdateDate <dttm> 2023-04-21 15:10:37
+#> $ rcn               <dbl> 929520
 
 cordis_disconnect(con)
 ```
@@ -285,13 +288,13 @@ cordis_tables() |> filter(grepl("^ref_", table))
 #>  2 ref_fp6programmes                 2027
 #>  3 ref_fp7programmes                 6233
 #>  4 ref_fp7subprogrammes              6096
-#>  5 ref_h2020programmes               3905
+#>  5 ref_h2020programmes                769
 #>  6 ref_h2020topicKeywords            2562
-#>  7 ref_h2020topics                   3905
+#>  7 ref_h2020topics                   3910
 #>  8 ref_horizonprogrammes              123
-#>  9 ref_horizontopics                 2047
+#>  9 ref_horizontopics                 2211
 #> 10 ref_organizationactivitytype         5
-#> 11 ref_projectfundingschemecategory   187
+#> 11 ref_projectfundingschemecategory   298
 
 # display first five rows with PI data
 con |> tbl("h2020_pi") |> head(5) |> knitr::kable()
@@ -311,27 +314,27 @@ con |> tbl("h2020_pi") |> head(5) |> knitr::kable()
 con |> tbl("h2020_project") |> head(1) |> glimpse()
 #> Rows: ??
 #> Columns: 20
-#> Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]
-#> $ id                 <dbl> 800506
-#> $ acronym            <chr> "IntegraSea"
+#> Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]
+#> $ id                 <dbl> 879926
+#> $ acronym            <chr> "EEN SACHSEN"
 #> $ status             <chr> "CLOSED"
-#> $ title              <chr> "Integrated offshore cultivation of high value seaw…
-#> $ startDate          <date> 2019-02-01
-#> $ endDate            <date> 2021-01-31
-#> $ totalCost          <dbl> 1486356
-#> $ ecMaxContribution  <dbl> 1486356
-#> $ legalBasis         <chr> "H2020-EU.1.3."
-#> $ topics             <chr> "MSCA-IF-2017"
-#> $ ecSignatureDate    <date> 2018-04-11
+#> $ title              <chr> "Specific activities in the context of innovation s…
+#> $ startDate          <date> 2020-01-01
+#> $ endDate            <date> 2021-12-31
+#> $ totalCost          <dbl> 125560
+#> $ ecMaxContribution  <dbl> 125559
+#> $ legalBasis         <chr> "H2020-EU.2.3."
+#> $ topics             <chr> "H2020-EEN-SGA4"
+#> $ ecSignatureDate    <date> 2019-12-06
 #> $ frameworkProgramme <chr> "H2020"
-#> $ masterCall         <chr> "H2020-MSCA-IF-2017"
-#> $ subCall            <chr> "H2020-MSCA-IF-2017"
-#> $ fundingScheme      <chr> "MSCA-IF-EF-ST"
+#> $ masterCall         <chr> "H2020-EEN-SGA4-2020-2021"
+#> $ subCall            <chr> "H2020-EEN-SGA4-2020-2021"
+#> $ fundingScheme      <chr> "CSA"
 #> $ nature             <chr> NA
-#> $ objective          <chr> "IntegraSea is in line with the EU Blue Growth Agen…
-#> $ contentUpdateDate  <dttm> 2022-08-24 00:17:27
-#> $ rcn                <dbl> 215814
-#> $ grantDoi           <chr> "10.3030/800506"
+#> $ objective          <chr> "The aim of the present proposal is to contribute t…
+#> $ contentUpdateDate  <dttm> 2022-10-28 14:07:26
+#> $ rcn                <dbl> 226577
+#> $ grantDoi           <chr> "10.3030/879926"
 
 # display first row with publications data
 con |> tbl("h2020_projectPublications") |> 
@@ -339,23 +342,23 @@ con |> tbl("h2020_projectPublications") |>
   glimpse()
 #> Rows: ??
 #> Columns: 16
-#> Database: DuckDB 0.6.2-dev1166 [unknown@Linux 5.4.0-139-generic:R 4.2.2//home/markus/.cache/cordis/cordisdb]
-#> $ id                <chr> "771635_675336_PUBLI"
-#> $ title             <chr> "Debating the EU's Raison d'�tre: On the Relation be…
+#> Database: DuckDB 0.8.1 [unknown@Linux 5.15.0-83-generic:R 4.3.1//home/markus/.cache/cordis/cordisdb]
+#> $ id                <chr> "754510_1752052_PUBLI"
+#> $ title             <chr> "Effect of Mechanochemical Recrystallization on the …
 #> $ isPublishedAs     <chr> "Peer reviewed articles"
-#> $ authors           <chr> "Andrea Sangiovanni"
-#> $ journalTitle      <chr> "JCMS: Journal of Common Market Studies"
-#> $ journalNumber     <chr> "57/1"
-#> $ publishedYear     <dbl> 2018
-#> $ publishedPages    <chr> "13-27"
-#> $ issn              <chr> "0021-9886"
+#> $ authors           <chr> "Nieto-Castro D; Garcés-Pineda FA; Moneo-Corcuera A;…
+#> $ journalTitle      <chr> "Inorganic Chemistry."
+#> $ journalNumber     <chr> "59 (12):"
+#> $ publishedYear     <dbl> 2020
+#> $ publishedPages    <chr> "7953-7959"
+#> $ issn              <chr> "0020-1669"
 #> $ isbn              <chr> NA
-#> $ doi               <chr> "10.1111/jcms.12819"
-#> $ projectID         <dbl> 771635
-#> $ projectAcronym    <chr> "EUSOL"
+#> $ doi               <chr> "10.1021/acs.inorgchem.9b03284"
+#> $ projectID         <dbl> 754510
+#> $ projectAcronym    <chr> "PROBIST"
 #> $ collection        <chr> "Project publication"
-#> $ contentUpdateDate <dttm> 2020-09-10 12:26:01
-#> $ rcn               <dbl> 621019
+#> $ contentUpdateDate <dttm> 2023-07-27 22:51:51
+#> $ rcn               <dbl> 961574
 
 cordis_disconnect(con)
 ```

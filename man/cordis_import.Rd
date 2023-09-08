@@ -8,7 +8,7 @@ cordis_import(
   repo_slug = "kth-library/cordis-data",
   refresh = FALSE,
   verbose = TRUE,
-  version = "v0.2.0"
+  version = "v0.2.1"
 )
 }
 \arguments{
